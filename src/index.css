@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.user-dropdown {
+	position: absolute;
+	inset: 0px auto auto 0px;
+	margin: 0px;
+	transform: translate(-100px, 40px);
+}

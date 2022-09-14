@@ -5,6 +5,7 @@ import { setShowNewProductModal } from "../../Store/Slices/ui";
 import { ProductListCard } from "../Products/ProductListCard";
 import { SearchProductForm } from "../Products/SearchProductForm";
 import { SkeletonListProducts } from "../Skeleton/SkeletonListPoducts";
+import { AddProductModal, DeleteModal } from "../Modals";
 
 export const AllProductsCount = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
@@ -56,6 +57,8 @@ export const AllProductsCount = () => {
 					</div>
 				)}
 			</div>
+			<AddProductModal />
+			<DeleteModal />
 		</div>
 	);
 };

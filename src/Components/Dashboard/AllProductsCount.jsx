@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsThunks } from "../../Store/Slices/products/thunks";
 import { setShowNewProductModal } from "../../Store/Slices/ui";
@@ -6,9 +6,19 @@ import { ProductListCard } from "../Products/ProductListCard";
 import { SearchProductForm } from "../Products/SearchProductForm";
 import { SkeletonListProducts } from "../Skeleton/SkeletonListPoducts";
 import { AddProductModal, DeleteModal } from "../Modals";
+import { useForm } from "../../Hooks/useForm";
+
+const getProductsByName = (products, search) => {
+	if (search.length > 3)
+		return products.filter((product) => product.name.toLocaleLowerCase().includes(search));
+	return null;
+};
 
 export const AllProductsCount = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
+	const { search, onInputChange, onResetForm } = useForm({ search: "" });
+	const searchProductsResult = useMemo(() => getProductsByName(products, search), [search]);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -22,7 +32,7 @@ export const AllProductsCount = () => {
 				<div className="flex flex-col w-1/2 items-left bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
 					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
-						<span>{products.lenght}</span>
+						<span className="font-bold">{products?.length}</span>
 						<small className="text-xs">Productos en Existencia</small>
 					</div>
 				</div>
@@ -38,7 +48,11 @@ export const AllProductsCount = () => {
 			<div className="flex-col md:w-1/2">
 				<h1 className="font-bold mt-4"> Productos</h1>
 				<div className="flex py-2 my-4 justify-center gap-2">
-					<SearchProductForm />
+					<SearchProductForm
+						search={search}
+						onInputChange={onInputChange}
+						onResetForm={onResetForm}
+					/>
 
 					<button
 						onClick={() => dispatch(setShowNewProductModal())}
@@ -51,9 +65,11 @@ export const AllProductsCount = () => {
 					<SkeletonListProducts />
 				) : (
 					<div className="max-h-72  overflow-y-auto">
-						{products.map((product) => (
-							<ProductListCard key={product.id} product={product} />
-						))}
+						{searchProductsResult
+							? searchProductsResult.map((product) => (
+									<ProductListCard key={product.id} product={product} />
+							  ))
+							: products.map((product) => <ProductListCard key={product.id} product={product} />)}
 					</div>
 				)}
 			</div>

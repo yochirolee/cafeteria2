@@ -12,8 +12,8 @@ export const getProductsThunks = () => {
 export const updateProductThunks = (product) => {
 	return async (dispatch) => {
 		try {
-			const { data, error } = await updateProductById(product);
-			dispatch(updateProduct(data));
+			await updateProductById(product);
+			dispatch(updateProduct(product));
 		} catch (error) {
 			console.log(error);
 		}
@@ -23,7 +23,7 @@ export const updateProductThunks = (product) => {
 export const deleteProductThunks = (product_id) => {
 	return async (dispatch) => {
 		try {
-			const { data, error } = await deleteProductById(product_id);
+			await deleteProductById(product_id);
 			dispatch(deleteProduct(product_id));
 		} catch (error) {
 			console.log(error.message);

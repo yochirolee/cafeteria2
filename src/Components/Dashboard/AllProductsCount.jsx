@@ -1,11 +1,11 @@
-import { React, useEffect, useState, useMemo } from "react";
+import { React, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsThunks } from "../../Store/Slices/products/thunks";
-import { setShowUpdateProductModal } from "../../Store/Slices/ui";
+import { setShowInsertModal } from "../../Store/Slices/ui";
 import { ProductListCard } from "../Products/ProductListCard";
 import { SearchProductForm } from "../Products/SearchProductForm";
 import { SkeletonListProducts } from "../Skeleton/SkeletonListPoducts";
-import { EditProductModal, DeleteModal } from "../Modals";
+import { EditProductModal, DeleteModal, InsertProductModal } from "../Modals";
 import { useForm } from "../../Hooks/useForm";
 
 const getProductsByName = (products, search) => {
@@ -17,6 +17,7 @@ const getProductsByName = (products, search) => {
 export const AllProductsCount = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
 	const { search, onInputChange, onResetForm } = useForm({ search: "" });
+
 	const searchProductsResult = useMemo(
 		() => getProductsByName(products, search),
 		[search, products.length],
@@ -58,7 +59,7 @@ export const AllProductsCount = () => {
 					/>
 
 					<button
-						onClick={() => dispatch(setShowUpdateProductModal())}
+						onClick={() => dispatch(setShowInsertModal())}
 						className=" border border-blue-500  text-blue-600 px-3.5 rounded-lg  justify-end"
 					>
 						<i className="fas fa-add"></i>
@@ -76,6 +77,7 @@ export const AllProductsCount = () => {
 					</div>
 				)}
 			</div>
+			<InsertProductModal />
 			<EditProductModal />
 			<DeleteModal />
 		</div>

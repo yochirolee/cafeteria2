@@ -15,7 +15,9 @@ export const productsSlice = createSlice({
 		setProducts: (state, action) => {
 			(state.isLoading = false), (state.products = action.payload.products);
 		},
-		insertProduct: (state, action) => {},
+		insertProduct: (state, action) => {
+			state.products.push(action.payload);
+		},
 		setSelectedProduct: (state, action) => {
 			state.selectedProduct = action.payload;
 		},
@@ -32,6 +34,7 @@ export const productsSlice = createSlice({
 
 export const {
 	newProduct,
+	insertProduct,
 	updateProduct,
 	deleteProduct,
 	startLoadingProducts,

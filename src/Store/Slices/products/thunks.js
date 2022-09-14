@@ -1,11 +1,34 @@
-import { getProducts, deleteProductById, updateProductById } from "../../../supabase/products_lib";
-import { startLoadingProducts, updateProduct, setProducts, deleteProduct } from "./productsSlice";
+import {
+	getProducts,
+	deleteProductById,
+	updateProductById,
+	insertNewProduct,
+} from "../../../supabase/products_lib";
+import {
+	startLoadingProducts,
+	updateProduct,
+	setProducts,
+	deleteProduct,
+	insertProduct,
+} from "./productsSlice";
 
 export const getProductsThunks = () => {
 	return async (dispatch) => {
 		dispatch(startLoadingProducts());
 		const { data, error } = await getProducts();
 		dispatch(setProducts({ products: data }));
+	};
+};
+
+export const insertProductThunks = (product) => {
+	return async (dispatch) => {
+		try {
+			const { data, error } = await insertNewProduct(product);
+
+			dispatch(insertProduct(product));
+		} catch (error) {
+			console.log(error);
+		}
 	};
 };
 

@@ -17,7 +17,7 @@ const getProductsByName = (products, search) => {
 export const AllProductsCount = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
 	const { search, onInputChange, onResetForm } = useForm({ search: "" });
-	const searchProductsResult = useMemo(() => getProductsByName(products, search), [search]);
+	const searchProductsResult = useMemo(() => getProductsByName(products, search), [search,products.length]);
 
 	const dispatch = useDispatch();
 

@@ -49,7 +49,7 @@ export const AllProductsCount = () => {
 				{isLoading ? (
 					<SkeletonListProducts />
 				) : (
-					<div className="max-h-64  overflow-y-auto">
+					<div className="max-h-72  overflow-y-auto">
 						{products.map((product) => (
 							<ProductListCard key={product.id} product={product} />
 						))}

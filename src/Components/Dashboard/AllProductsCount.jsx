@@ -1,24 +1,32 @@
-import { React } from "react";
-import { useDispatch } from "react-redux";
-import { setShowNewProductModal } from "../../Store/Slices/uiSlice";
+import { React, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsThunks } from "../../Store/Slices/products/thunks";
+import { setShowNewProductModal } from "../../Store/Slices/ui";
 import { ProductListCard } from "../Products/ProductListCard";
 import { SearchProductForm } from "../Products/SearchProductForm";
+import { SkeletonListProducts } from "../Skeleton/SkeletonListPoducts";
+
 export const AllProductsCount = () => {
+	const { products, isLoading } = useSelector((state) => state.productsSlice);
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getProductsThunks());
+	}, []);
 
 	return (
 		<div className="container mx-auto  p-4">
-			<h1 className="font-bold my-2"> AllProductsCount</h1>
+			<h1 className="font-bold my-2">Estado de Productos</h1>
 			<div className="flex gap-2 ">
 				<div className="flex flex-col w-1/2 items-left bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i class="fas fa-chart-pie text-3xl my-2"></i>
+					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
 						<span>123</span>
 						<small className="text-xs">Productos en Existencia</small>
 					</div>
 				</div>
 				<div className="flex flex-col w-1/2 items-left bg-sky-500/80 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i class="fas fa-chart-pie text-3xl my-2"></i>
+					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
 						<span>123</span>
 						<small className="text-xs">Productos en Existencia</small>
@@ -38,7 +46,15 @@ export const AllProductsCount = () => {
 						<i className="fas fa-add"></i>
 					</button>
 				</div>
-				<ProductListCard />
+				{isLoading ? (
+					<SkeletonListProducts />
+				) : (
+					<div className="max-h-64  overflow-y-auto">
+						{products.map((product) => (
+							<ProductListCard key={product.id} product={product} />
+						))}
+					</div>
+				)}
 			</div>
 		</div>
 	);

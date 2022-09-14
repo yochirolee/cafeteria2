@@ -1,6 +1,6 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { setToggleUserMenu } from "../../Store/Slices/uiSlice";
+import { setToggleUserMenu } from "../../Store/Slices/ui";
 
 export const Avatar = () => {
 	const dispatch = useDispatch();

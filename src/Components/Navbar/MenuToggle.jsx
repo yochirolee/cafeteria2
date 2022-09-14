@@ -1,6 +1,6 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { setToggleMainMenu } from "../../Store/Slices/uiSlice";
+import { setToggleMainMenu } from "../../Store/Slices/ui";
 export const MenuToggle = () => {
 	const dispatch = useDispatch();
 

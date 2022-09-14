@@ -1,15 +1,14 @@
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowNewProductModal } from "../../Store/Slices/uiSlice";
+import { setShowNewProductModal } from "../../Store/Slices/ui/uiSlice";
 export const AddProductModal = () => {
-	
-    const { showNewProductModal } = useSelector((state) => state.uiSlice);
+	const { showNewProductModal } = useSelector((state) => state.uiSlice);
 	const dispatch = useDispatch();
-	
-    return (
+
+	return (
 		<div
 			id="authentication-modal"
-			tabindex="-1"
+			tabIndex="-1"
 			aria-hidden="true"
 			className={`overflow-y-auto bg-gray-500/60  overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center ${
 				showNewProductModal ? " " : "hidden"
@@ -31,9 +30,9 @@ export const AddProductModal = () => {
 							xmlns="http://www.w3.org/2000/svg"
 						>
 							<path
-								fill-rule="evenodd"
+								fillRule="evenodd"
 								d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-								clip-rule="evenodd"
+								clipRule="evenodd"
 							></path>
 						</svg>
 						<span className="sr-only">Close modal</span>
@@ -45,7 +44,7 @@ export const AddProductModal = () => {
 						<form className="space-y-6" action="#">
 							<div>
 								<label
-									for="email"
+									htmlFor="email"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 								>
 									Your email
@@ -53,7 +52,6 @@ export const AddProductModal = () => {
 								<input
 									type="email"
 									name="email"
-									id="email"
 									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 									placeholder="name@company.com"
 									required=""
@@ -61,7 +59,7 @@ export const AddProductModal = () => {
 							</div>
 							<div>
 								<label
-									for="password"
+									htmlFor="password"
 									className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 								>
 									Your password
@@ -69,7 +67,6 @@ export const AddProductModal = () => {
 								<input
 									type="password"
 									name="password"
-									id="password"
 									placeholder="••••••••"
 									className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 									required=""
@@ -79,7 +76,7 @@ export const AddProductModal = () => {
 								<div className="flex items-start">
 									<div className="flex items-center h-5">
 										<input
-											id="remember"
+											
 											type="checkbox"
 											value=""
 											className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-600 dark:border-gray-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
@@ -87,7 +84,7 @@ export const AddProductModal = () => {
 										/>
 									</div>
 									<label
-										for="remember"
+										htmlFor="remember"
 										className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 									>
 										Remember me

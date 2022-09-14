@@ -1,11 +1,15 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../Store/Slices/products/productsSlice";
-import { setShowDeleteModal, setShowNewProductModal } from "../../Store/Slices/ui";
+import { setShowDeleteModal, setShowUpdateProductModal } from "../../Store/Slices/ui";
 
 export const ProductListCard = ({ product }) => {
 	const dispatch = useDispatch();
 
+	const onProductUpdate = () => {
+		dispatch(setSelectedProduct(product));
+		dispatch(setShowUpdateProductModal());
+	};
 	const onProductDelete = () => {
 		dispatch(setSelectedProduct(product));
 		dispatch(setShowDeleteModal());
@@ -49,7 +53,7 @@ export const ProductListCard = ({ product }) => {
 				className="fas fa-trash-can text-red-400 mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 			></i>
 			<i
-				onClick={() => dispatch(setShowNewProductModal())}
+				onClick={() => onProductUpdate()}
 				className="fas fa-chevron-right text-gray-600 mx-2 cursor-pointer hover:text-gray-600 "
 			></i>
 		</div>

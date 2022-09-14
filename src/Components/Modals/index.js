@@ -1,2 +1,2 @@
-export * from './AddProductModal'
-export * from './DeleteModal'
+export * from "./EditProductModal";
+export * from "./DeleteModal";

@@ -1,9 +1,15 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
+import { deleteProductThunks } from "../../Store/Slices/products/thunks";
 import { setShowNewProductModal } from "../../Store/Slices/ui";
+import { deleteProductById } from "../../supabase/products_lib";
 import { AddProductModal } from "../Modals/AddProductModal";
 export const ProductListCard = ({ product }) => {
 	const dispatch = useDispatch();
+
+	const onProductDelete = (product_id) => {
+		dispatch(deleteProductThunks(product_id));
+	};
 
 	return (
 		<div className="flex items-center justify-between  p-2 border rounded-lg my-2 hover:bg-gray-100">
@@ -39,8 +45,12 @@ export const ProductListCard = ({ product }) => {
 				</div>
 			</div>
 			<i
+				onClick={() => onProductDelete(product.id)}
+				className="fas fa-trash-can text-red-400 mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
+			></i>
+			<i
 				onClick={() => dispatch(setShowNewProductModal())}
-				className="fas fa-chevron-right text-gray-600 mx-2"
+				className="fas fa-chevron-right text-gray-600 mx-2 cursor-pointer hover:text-gray-600 "
 			></i>
 			<AddProductModal />
 		</div>

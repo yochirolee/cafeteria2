@@ -21,7 +21,7 @@ export const AllProductsCount = () => {
 				<div className="flex flex-col w-1/2 items-left bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
 					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
-						<span>123</span>
+						<span>{products.lenght}</span>
 						<small className="text-xs">Productos en Existencia</small>
 					</div>
 				</div>

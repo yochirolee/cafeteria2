@@ -12,13 +12,16 @@ export const productsSlice = createSlice({
 		},
 
 		setProducts: (state, action) => {
-			(state.isLoading = false), (state.products = action.payload.products);
-			console.log(action.payload, "payload");
-			console.log(action, "action");
+			state.isLoading = false, 
+			state.products = action.payload.products;
+		;
 		},
 		insertProduct: (state, action) => {},
 		updateProduct: (state, action) => {},
-		deleteProduct: (state, action) => {},
+		deleteProduct: (state, action) => {
+			state.products = state.products.filter((product) => product.id !== action.payload);
+
+		},
 	},
 });
 

@@ -18,12 +18,12 @@ export const DeleteModal = () => {
 		<div
 			id="popup-modal"
 			tabIndex="-1"
-			className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center ${
+			className={`overflow-y-auto bg-gray-700/90  overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full justify-center items-center ${
 				showDeleteModal ? "" : "hidden"
 			}`}
 			aria-hidden="true"
 		>
-			<div className="relative p-4 w-full max-w-md h-full md:h-auto">
+			<div className="relative  p-4 w-full max-w-md h-full md:h-auto">
 				<div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
 					<button
 						type="button"

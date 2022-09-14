@@ -19,12 +19,22 @@ export const productsSlice = createSlice({
 		setSelectedProduct: (state, action) => {
 			state.selectedProduct = action.payload;
 		},
-		updateProduct: (state, action) => {},
+		updateProduct: (state, action) => {
+			state.products = state.products.map((product) =>
+				product.id === action.payload.id ? action.payload : product,
+			);
+		},
 		deleteProduct: (state, action) => {
 			state.products = state.products.filter((product) => product.id !== action.payload);
 		},
 	},
 });
 
-export const { newProduct, updateProduct, deleteProduct, startLoadingProducts, setProducts,setSelectedProduct } =
-	productsSlice.actions;
+export const {
+	newProduct,
+	updateProduct,
+	deleteProduct,
+	startLoadingProducts,
+	setProducts,
+	setSelectedProduct,
+} = productsSlice.actions;

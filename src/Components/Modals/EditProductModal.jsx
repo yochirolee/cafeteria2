@@ -1,22 +1,31 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowUpdateProductModal } from "../../Store/Slices/ui/uiSlice";
 import { useForm } from "react-hook-form";
+import { updateProduct } from "../../Store/Slices/products/productsSlice";
+import { updateProductThunks } from "../../Store/Slices/products/thunks";
 
 export const EditProductModal = () => {
 	const { showUpdateProductModal } = useSelector((state) => state.uiSlice);
 	const { selectedProduct } = useSelector((state) => state.productsSlice);
 	const dispatch = useDispatch();
 
-	console.log(selectedProduct);
+	
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
 	} = useForm();
 
-	const onSubmit = (data) => console.log(data);
-	console.log(errors);
+	useEffect(() => {
+		reset(selectedProduct);
+	}, [selectedProduct]);
+
+	const onSubmit = (data) => {
+		dispatch(updateProductThunks(data));
+		dispatch(setShowUpdateProductModal());
+	};
 
 	return (
 		<div
@@ -69,8 +78,10 @@ export const EditProductModal = () => {
 										placeholder="Nombre"
 										defaultValue={selectedProduct?.name}
 										{...register("name", { required: true, maxLength: 80 })}
-										
 									/>
+									{errors.name && (
+										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>
+									)}
 								</div>
 								<div>
 									<label
@@ -87,6 +98,9 @@ export const EditProductModal = () => {
 										defaultValue={selectedProduct?.price_buy}
 										{...register("price_buy", { required: true, maxLength: 100 })}
 									/>
+									{errors.price_buy && (
+										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>
+									)}
 								</div>
 								<div>
 									<label
@@ -100,7 +114,7 @@ export const EditProductModal = () => {
 										type="number"
 										placeholder="Precio de Venta"
 										defaultValue={selectedProduct?.price_sell}
-										{...register("price_sale", { required: true })}
+										{...register("price_sell", { required: true })}
 									/>
 								</div>
 								<div>

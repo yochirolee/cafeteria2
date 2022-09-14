@@ -1,7 +1,6 @@
 import { React } from "react";
 
 export const SearchProductForm = ({ search, onInputChange, onResetForm }) => {
-	console.log(search);
 	return (
 		<form className="flex items-center">
 			<label htmlFor="simple-search" className="sr-only">

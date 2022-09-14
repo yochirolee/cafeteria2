@@ -15,7 +15,6 @@ export const uiSlice = createSlice({
 			state.toggleUserMenu = !state.toggleUserMenu;
 		},
 		setShowUpdateProductModal: (state) => {
-			console.log("update");
 			state.showUpdateProductModal = !state.showUpdateProductModal;
 		},
 		setShowDeleteModal: (state) => {

@@ -59,7 +59,7 @@ export const ProductSellCard = ({ product }) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex border-l border-dotted">
+			<div className="flex border-l border-dotted w-1/5 justify-center">
 				<i
 					onClick={() => onProductDelete()}
 					className="fas fa-plus text-gray-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"

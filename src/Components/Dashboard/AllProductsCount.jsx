@@ -9,9 +9,16 @@ import { EditProductModal, DeleteModal, InsertProductModal } from "../Modals";
 import { useForm } from "../../Hooks/useForm";
 
 const getProductsByName = (products, search) => {
-	if (search.length > 3)
+	if (search.length > 2)
 		return products.filter((product) => product.name.toLocaleLowerCase().includes(search));
 	return null;
+};
+const calculateTotalProductos = (products) => {
+	let totalProductos = 0;
+	products.map((prod) => {
+		totalProductos += parseFloat(prod.quantity);
+	});
+	return totalProductos;
 };
 
 export const AllProductsCount = () => {
@@ -22,6 +29,8 @@ export const AllProductsCount = () => {
 		() => getProductsByName(products, search),
 		[search, products.length],
 	);
+
+	const productTotals = useMemo(() => calculateTotalProductos(products), [products]);
 
 	const dispatch = useDispatch();
 
@@ -37,14 +46,14 @@ export const AllProductsCount = () => {
 					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
 						<span className="font-bold">{products?.length}</span>
-						<small className="text-xs">Productos en Existencia</small>
+						<small className="text-xs">Total de Productos Distintos</small>
 					</div>
 				</div>
 				<div className="flex flex-col w-1/2 items-left bg-sky-500/80 text-white p-4 rounded-lg  border flex-shrink-0">
 					<i className="fas fa-chart-pie text-3xl my-2"></i>
 					<div className="flex flex-col gap-1 ">
-						<span>123</span>
-						<small className="text-xs">Productos en Existencia</small>
+						<span>{productTotals}</span>
+						<small className="text-xs">Total de Productos</small>
 					</div>
 				</div>
 			</div>

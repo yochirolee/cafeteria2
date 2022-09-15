@@ -7,6 +7,7 @@ export const getProducts = async () => {
 
 export const insertNewProduct = async (product) => {
 	const { data, error } = await supabase.from("c_products").insert([product]);
+	
 	return { data, error };
 };
 

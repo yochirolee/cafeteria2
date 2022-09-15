@@ -2,7 +2,7 @@ import { React } from "react";
 
 export const SearchProductForm = ({ search, onInputChange, onResetForm }) => {
 	return (
-		<form className="flex items-center">
+		<form className="flex items-center w-full">
 			<label htmlFor="simple-search" className="sr-only">
 				Buscar
 			</label>
@@ -35,7 +35,7 @@ export const SearchProductForm = ({ search, onInputChange, onResetForm }) => {
 				<button
 					type="button"
 					className={`absolute top-1.5 right-1.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white  ${
-						search?.length > 3 ? " " : "hidden"
+						search?.length > 2 ? " " : "hidden"
 					}`}
 					onClick={() => onResetForm()}
 				>

@@ -22,7 +22,6 @@ export const uiSlice = createSlice({
 			state.showDeleteModal = !state.showDeleteModal;
 		},
 		setShowInsertModal: (state) => {
-			console.log('show')
 			state.showInsertModal = !state.showInsertModal;
 		},
 	},

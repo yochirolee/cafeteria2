@@ -24,8 +24,7 @@ export const insertProductThunks = (product) => {
 	return async (dispatch) => {
 		try {
 			const { data, error } = await insertNewProduct(product);
-
-			dispatch(insertProduct(product));
+			dispatch(insertProduct(data[0]));
 		} catch (error) {
 			console.log(error);
 		}

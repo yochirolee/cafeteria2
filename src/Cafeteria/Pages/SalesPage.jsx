@@ -2,13 +2,12 @@ import { React, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsThunks } from "../../Store/Cafeteria/Slices";
 import { setShowInsertModal } from "../../Store/Cafeteria/Slices";
-import { ProductListCard } from "../Components/Products";
 import { SearchProductForm } from "../Components/Products";
 import { SkeletonListProducts } from "../Components/Skeleton";
-import { EditProductModal, DeleteModal, InsertProductModal } from "../Components/Modals";
 import { useForm } from "../../Hooks";
 import { CafeteriaLayout } from "../Layout/CafeteriaLayout";
 import { ProductSellCard } from "../Components/Products/ProductSellCard";
+import { SaleProductModal } from "../Components/Modals/SaleProductModal";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -25,7 +24,7 @@ const calculateTotalProductos = (products) => {
 const calculateTotalSales = (products) => {
 	let totalSales = 0;
 	products.map((prod) => {
-		totalSales += parseFloat(prod.quantity_sold)* parseFloat(prod.price_sell);
+		totalSales += parseFloat(prod.quantity_sold) * parseFloat(prod.price_sell);
 	});
 	return totalSales;
 };
@@ -38,8 +37,6 @@ export const SalesPage = () => {
 		() => getProductsByName(products, search),
 		[search, products.length],
 	);
-
-	const productTotals = useMemo(() => calculateTotalProductos(products), [products]);
 
 	const dispatch = useDispatch();
 
@@ -67,7 +64,6 @@ export const SalesPage = () => {
 						<small className="text-xs">Venta del Dia</small>
 					</div>
 				</div>
-				
 			</div>
 
 			<div className="flex-col md:w-1/2">
@@ -98,9 +94,8 @@ export const SalesPage = () => {
 					</div>
 				)}
 			</div>
-			<InsertProductModal />
-			<EditProductModal />
-			<DeleteModal />
+
+			<SaleProductModal />
 		</CafeteriaLayout>
 	);
 };

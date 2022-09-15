@@ -7,6 +7,7 @@ export const uiSlice = createSlice({
 		showUpdateProductModal: false,
 		showDeleteModal: false,
 		showInsertModal: false,
+		showSaleModal:false
 	},
 	reducers: {
 		setToggleMainMenu: (state /*action*/) => {
@@ -24,6 +25,9 @@ export const uiSlice = createSlice({
 		setShowInsertModal: (state) => {
 			state.showInsertModal = !state.showInsertModal;
 		},
+		setShowSaleModal: (state) => {
+			state.showSaleModal = !state.showSaleModal;
+		},
 	},
 });
 
@@ -33,4 +37,5 @@ export const {
 	setShowUpdateProductModal,
 	setShowDeleteModal,
 	setShowInsertModal,
+	setShowSaleModal
 } = uiSlice.actions;

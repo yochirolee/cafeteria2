@@ -1,18 +1,14 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
-import { setShowDeleteModal, setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
+import { setShowSaleModal } from "../../../Store/Cafeteria/Slices";
 
 export const ProductSellCard = ({ product }) => {
 	const dispatch = useDispatch();
 
-	const onProductUpdate = () => {
+	const onProductSale = () => {
 		dispatch(setSelectedProduct(product));
-		dispatch(setShowUpdateProductModal());
-	};
-	const onProductDelete = () => {
-		dispatch(setSelectedProduct(product));
-		dispatch(setShowDeleteModal());
+		dispatch(setShowSaleModal());
 	};
 
 	return (
@@ -41,7 +37,7 @@ export const ProductSellCard = ({ product }) => {
 						</div>
 						<div className="flex flex-col text-center">
 							<small>a Venta</small>
-							<small>{product.entry + product.quantity}</small>
+							<small>{parseFloat(product.entry) + parseFloat(product.quantity)}</small>
 						</div>
 						<div className="flex flex-col text-center">
 							<small>Vendido</small>
@@ -52,11 +48,11 @@ export const ProductSellCard = ({ product }) => {
 			</div>
 			<div className="flex   w-1/5 justify-center">
 				<i
-					onClick={() => onProductDelete()}
+					onClick={() => onProductSale()}
 					className="fas fa-plus text-blue-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 				></i>
 				<i
-					onClick={() => onProductUpdate()}
+					onClick={() => onProductSale()}
 					className="fas fas fa-cart-shopping  text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
 				></i>
 			</div>

@@ -4,7 +4,7 @@ export const CafeteriaLayout = ({ children }) => {
 	return (
 		<>
 			<NavbarApp />
-			{children}
+			<div className="container mx-auto  p-4">{children}</div>
 		</>
 	);
 };

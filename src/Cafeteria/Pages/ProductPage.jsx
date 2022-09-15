@@ -41,7 +41,7 @@ export const ProductPage = () => {
 
 	return (
 		<CafeteriaLayout>
-			<div className="container mx-auto  p-4">
+		
 				<h1 className="font-bold my-2">Estado de Productos</h1>
 				<div className="flex gap-2 ">
 					<div className="flex flex-col w-1/2 items-left bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
@@ -91,7 +91,7 @@ export const ProductPage = () => {
 				<InsertProductModal />
 				<EditProductModal />
 				<DeleteModal />
-			</div>
+			
 		</CafeteriaLayout>
 	);
 };

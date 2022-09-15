@@ -30,28 +30,28 @@ export const ProductSellCard = ({ product }) => {
 							</small>
 						</div>
 					</div>
-					<div className="flex border-t border-dotted  p-2 text-xs justify-around gap-2 text">
-						<div className="text-red-600 flex items-center  gap-2">
+					<div className="flex border-t p-1 px-4 border-dotted  text-xs justify-between gap-2 text">
+						<div className="text-gray-600 flex items-center  gap-2">
 							<small>Inicio: {product.price_buy}</small>
 						</div>
-						<div className="text-green-600 flex items-center  gap-2">
+						<div className="text-gray-600 flex items-center  gap-2">
 							<small>Entrada: {product.price_sell}</small>
 						</div>
 
-						<div className="text-blue-600 flex items-center  gap-2">
+						<div className="text-gray-600 flex items-center  gap-2">
 							<small>a Venta:{product.price_sell - product.price_buy} cup</small>
 						</div>
 
-						<div className="text-blue-600 flex items-center  gap-2">
+						<div className="text-gray-600 flex items-center  gap-2">
 							<small>Vendido:{product.price_sell - product.price_buy} cup</small>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className="flex border-l border-dotted w-1/5 justify-center">
+			<div className="flex   w-1/5 justify-center">
 				<i
 					onClick={() => onProductDelete()}
-					className="fas fa-plus text-gray-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
+					className="fas fa-plus text-blue-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 				></i>
 				<i
 					onClick={() => onProductUpdate()}

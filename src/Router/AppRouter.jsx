@@ -4,7 +4,7 @@ import { AuthRoutes } from "../Auth/Routes/AuthRoutes";
 import { CafeteriaRoutes } from "../Cafeteria/Routes/CafeteriaRoutes";
 
 export const AppRouter = () => {
-	const  status  = "authenticated";
+	const  status  = "autheticated";
 
 	return (
 		<Routes>

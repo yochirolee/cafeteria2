@@ -30,31 +30,20 @@ export const ProductSellCard = ({ product }) => {
 							</small>
 						</div>
 					</div>
-					<div className="flex  p-2 text-xs justify-around gap-2 text">
+					<div className="flex border-t border-dotted  p-2 text-xs justify-around gap-2 text">
 						<div className="text-red-600 flex items-center  gap-2">
-							<i className="fas  fa-play "></i>
 							<small>Inicio: {product.price_buy}</small>
 						</div>
 						<div className="text-green-600 flex items-center  gap-2">
-							<i className="fas  fa-plus "></i>
 							<small>Entrada: {product.price_sell}</small>
 						</div>
 
 						<div className="text-blue-600 flex items-center  gap-2">
-							<i className="fas  fa-dollar-sign "></i>
-
 							<small>a Venta:{product.price_sell - product.price_buy} cup</small>
 						</div>
 
 						<div className="text-blue-600 flex items-center  gap-2">
-							<i className="fas  fa-dollar-sign "></i>
-
 							<small>Vendido:{product.price_sell - product.price_buy} cup</small>
-						</div>
-						<div className="text-blue-600 flex items-center  gap-2">
-							<i className="fas  fa-dollar-sign "></i>
-
-							<small>Final:{product.price_sell - product.price_buy} cup</small>
 						</div>
 					</div>
 				</div>

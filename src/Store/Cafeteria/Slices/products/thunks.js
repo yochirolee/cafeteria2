@@ -3,7 +3,7 @@ import {
 	deleteProductById,
 	updateProductById,
 	insertNewProduct,
-} from "../../../supabase/products_lib";
+} from "../../../../supabase/products_lib";
 import {
 	startLoadingProducts,
 	updateProduct,

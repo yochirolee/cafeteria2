@@ -1,11 +1,12 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowInsertModal } from "../../Store/Slices/ui/uiSlice";
+import { setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
 import { useForm } from "react-hook-form";
-import { insertProductThunks } from "../../Store/Slices/products/thunks";
+import { updateProductThunks } from "../../../Store/Cafeteria/Slices";
 
-export const InsertProductModal = () => {
-	const { showInsertModal } = useSelector((state) => state.uiSlice);
+export const EditProductModal = () => {
+	const { showUpdateProductModal } = useSelector((state) => state.uiSlice);
+	const { selectedProduct } = useSelector((state) => state.productsSlice);
 	const dispatch = useDispatch();
 
 	const {
@@ -15,10 +16,13 @@ export const InsertProductModal = () => {
 		formState: { errors },
 	} = useForm();
 
+	useEffect(() => {
+		reset(selectedProduct);
+	}, [selectedProduct]);
+
 	const onSubmit = (data) => {
-		dispatch(insertProductThunks(data));
-		dispatch(setShowInsertModal());
-		reset();
+		dispatch(updateProductThunks(data));
+		dispatch(setShowUpdateProductModal());
 	};
 
 	return (
@@ -27,14 +31,14 @@ export const InsertProductModal = () => {
 			tabIndex="-1"
 			aria-hidden="true"
 			className={`overflow-y-auto bg-gray-500/60  overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center ${
-				showInsertModal ? " " : "hidden"
+				showUpdateProductModal ? " " : "hidden"
 			}`}
 		>
 			<div className="relative p-4 w-full max-w-md h-full md:h-auto">
 				<div className="relative p-4 w-full max-w-md h-full md:h-auto">
 					<div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
 						<button
-							onClick={() => dispatch(setShowInsertModal())}
+							onClick={() => dispatch(setShowUpdateProductModal())}
 							type="button"
 							className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
 							data-modal-toggle="authentication-modal"
@@ -56,7 +60,7 @@ export const InsertProductModal = () => {
 						</button>
 						<div className="py-6 px-6 lg:px-8">
 							<h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-								Insertar Producto
+								Editar Producto
 							</h3>
 							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6" action="#">
 								<div>
@@ -70,6 +74,7 @@ export const InsertProductModal = () => {
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 										type="text"
 										placeholder="Nombre"
+										defaultValue={selectedProduct?.name}
 										{...register("name", { required: true, maxLength: 80 })}
 									/>
 									{errors.name && (
@@ -87,7 +92,8 @@ export const InsertProductModal = () => {
 									<input
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 										type="number"
-										placeholder="0"
+										placeholder="Precio de Compra"
+										defaultValue={selectedProduct?.price_buy}
 										{...register("price_buy", { required: true, maxLength: 100 })}
 									/>
 									{errors.price_buy && (
@@ -104,7 +110,8 @@ export const InsertProductModal = () => {
 									<input
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 										type="number"
-										placeholder="0"
+										placeholder="Precio de Venta"
+										defaultValue={selectedProduct?.price_sell}
 										{...register("price_sell", { required: true })}
 									/>
 								</div>
@@ -118,16 +125,31 @@ export const InsertProductModal = () => {
 									<input
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
 										type="number"
-										placeholder="0"
+										defaultValue={selectedProduct?.quantity}
+										placeholder="Cantidad"
 										{...register("quantity", { required: true, maxLength: 12 })}
 									/>
 								</div>
-
+								<div>
+									<label
+										htmlFor="quantity_sold"
+										className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+									>
+										Cantidad Vendida
+									</label>
+									<input
+										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+										type="number"
+										placeholder="Cantidad"
+										defaultValue={selectedProduct?.quantity_sold}
+										{...register("quantity_sold", { required: true, maxLength: 12 })}
+									/>
+								</div>
 								<button
 									type="submit"
 									className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 								>
-									Insertar Producto
+									Editar Producto
 								</button>
 							</form>
 						</div>

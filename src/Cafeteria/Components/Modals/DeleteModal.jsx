@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductThunks } from "../../Store/Slices/products/thunks";
-import { setShowDeleteModal } from "../../Store/Slices/ui";
+import { deleteProductThunks } from "../../../Store/Cafeteria/Slices";
+import { setShowDeleteModal } from "../../../Store/Cafeteria/Slices";
 
 export const DeleteModal = () => {
 	const { selectedProduct } = useSelector((state) => state.productsSlice);

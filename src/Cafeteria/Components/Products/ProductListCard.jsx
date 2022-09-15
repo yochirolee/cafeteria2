@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../Store/Slices/products/productsSlice";
-import { setShowDeleteModal, setShowUpdateProductModal } from "../../Store/Slices/ui";
+import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
+import { setShowDeleteModal, setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
 
 export const ProductListCard = ({ product }) => {
 	const dispatch = useDispatch();

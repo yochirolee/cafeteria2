@@ -1,12 +1,12 @@
 import { React, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsThunks } from "../../Store/Slices/products/thunks";
-import { setShowInsertModal } from "../../Store/Slices/ui";
-import { ProductListCard } from "../Products/ProductListCard";
-import { SearchProductForm } from "../Products/SearchProductForm";
-import { SkeletonListProducts } from "../Skeleton/SkeletonListPoducts";
-import { EditProductModal, DeleteModal, InsertProductModal } from "../Modals";
-import { useForm } from "../../Hooks/useForm";
+import { getProductsThunks } from "../../Store/Cafeteria/Slices";
+import { setShowInsertModal } from "../../Store/Cafeteria/Slices";
+import { ProductListCard } from "../Components/Products";
+import { SearchProductForm } from "../Components/Products";
+import { SkeletonListProducts } from "../Components/Skeleton";
+import { EditProductModal, DeleteModal, InsertProductModal } from "../Components/Modals";
+import { useForm } from "../../Hooks";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -21,7 +21,7 @@ const calculateTotalProductos = (products) => {
 	return totalProductos;
 };
 
-export const AllProductsCount = () => {
+export const ProductPage = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
 	const { search, onInputChange, onResetForm } = useForm({ search: "" });
 

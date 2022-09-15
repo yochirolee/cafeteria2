@@ -24,27 +24,17 @@ export const ProductSellCard = ({ product }) => {
 						<div>
 							<i className="fas fa-box   p-1.5 text-gray-600"></i>
 							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
-							<i className="fas fa-sack-dollar   p-1.5 text-gray-600"></i>
-							<small className="font-bold text-gray-600 pr-4">
+							<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
+							<small className="font-bold text-green-500 pr-4">
 								{product.quantity * product.price_sell}
 							</small>
 						</div>
 					</div>
-					<div className="flex border-t p-1 px-4 border-dotted  text-xs justify-between gap-2 text">
-						<div className="text-gray-600 flex items-center  gap-2">
-							<small>Inicio: {product.price_buy}</small>
-						</div>
-						<div className="text-gray-600 flex items-center  gap-2">
-							<small>Entrada: {product.price_sell}</small>
-						</div>
-
-						<div className="text-gray-600 flex items-center  gap-2">
-							<small>a Venta:{product.price_sell - product.price_buy} cup</small>
-						</div>
-
-						<div className="text-gray-600 flex items-center  gap-2">
-							<small>Vendido:{product.price_sell - product.price_buy} cup</small>
-						</div>
+					<div className="flex border-t text-slate-600 p-1 px-4 border-dotted  text-xs justify-between gap-2 text">
+						<small>Inicio: {product.price_buy}</small>
+						<small>Entrada: {product.price_sell}</small>
+						<small>a Venta: {product.price_sell - product.price_buy} cup</small>
+						<small>Vendido: {product.price_sell - product.price_buy} cup</small>
 					</div>
 				</div>
 			</div>
@@ -55,7 +45,7 @@ export const ProductSellCard = ({ product }) => {
 				></i>
 				<i
 					onClick={() => onProductUpdate()}
-					className="fas fas fa-sack-dollar text-green-600 mx-2 cursor-pointer hover:text-gray-600 "
+					className="fas fas fa-cart-shopping  text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
 				></i>
 			</div>
 		</div>

@@ -22,6 +22,13 @@ const calculateTotalProductos = (products) => {
 	});
 	return totalProductos;
 };
+const calculateTotalSales = (products) => {
+	let totalSales = 0;
+	products.map((prod) => {
+		totalSales += parseFloat(prod.quantity_sold)* parseFloat(prod.price_sell);
+	});
+	return totalSales;
+};
 
 export const SalesPage = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
@@ -42,22 +49,25 @@ export const SalesPage = () => {
 
 	return (
 		<CafeteriaLayout>
-			<h1 className="font-bold my-2">Venta del Dia</h1>
+			<h1 className="font-bold my-2">Ventas</h1>
 			<div className="flex gap-2 ">
-				<div className="flex flex-col w-1/2 items-left bg-green-400 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i className="fas fa-dollar-sign text-3xl my-2"></i>
+				<div className="flex flex-col w-1/3 items-center bg-green-400 text-white p-4 rounded-lg  border flex-shrink-0">
+					<i className="fas fa-dollar-sign text-3xl my-2">
+						<span className="font-bold ml-2">{calculateTotalSales(products)}</span>
+					</i>
 					<div className="flex flex-col gap-1 ">
-						<span className="font-bold">{products?.length}</span>
-						<small className="text-xs">Total de ventas</small>
+						<small className="text-xs">Venta del Dia</small>
 					</div>
 				</div>
-				<div className="flex flex-col w-1/2 items-left bg-sky-500/80 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i className="fas fa-dollar-sign text-3xl my-2"></i>
+				<div className="flex flex-col w-1/3 items-center bg-green-400 text-white p-4 rounded-lg  border flex-shrink-0">
+					<i className="fas fa-dollar-sign text-3xl my-2">
+						<span className="font-bold ml-2">{calculateTotalSales(products)}</span>
+					</i>
 					<div className="flex flex-col gap-1 ">
-						<span>{productTotals}</span>
-						<small className="text-xs">Total de Productos</small>
+						<small className="text-xs">Venta del Dia</small>
 					</div>
 				</div>
+				
 			</div>
 
 			<div className="flex-col md:w-1/2">

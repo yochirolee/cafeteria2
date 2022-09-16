@@ -1,7 +1,6 @@
 import { React, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import { getProductsThunks } from "../../Store/Cafeteria/Slices";
 import { getSalesThunks } from "../../Store/Cafeteria/Slices";
 import { SearchProductForm } from "../Components/Products";
@@ -51,7 +50,6 @@ export const SalesPage = () => {
 		dispatch(getSalesThunks());
 	}, []);
 
-
 	return (
 		<CafeteriaLayout>
 			<h1 className="font-bold my-2">Ventas</h1>
@@ -98,8 +96,7 @@ export const SalesPage = () => {
 
 				<SalesDetails sales={sales} isLoadingSales={isLoadingSales} />
 			</div>
-
-			<SaleProductModal />
+			{isLoading ? "" : <SaleProductModal />}
 		</CafeteriaLayout>
 	);
 };

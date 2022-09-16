@@ -24,14 +24,8 @@ export const updateProductById = async (product) => {
 
 //SALES
 
-export const db_getSales = async () => {
-	const { data, error } = await supabase
-		.from("c_sales")
-		.select("*")
-		.match({ date: format(new Date(), "dd.MM.yyyy") });
 
-	return { data, error };
-};
+
 export const db_getSalesByDay = async (day=new Date()) => {
 	const { data, error } = await supabase
 		.from("c_sales")

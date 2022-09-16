@@ -1,12 +1,7 @@
 import { React } from "react";
-import { checkIfToday } from "../../Helpers/fnsDate";
-import { format, isToday, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 export const SalesDetails = ({ sales, isLoadingSales }) => {
-	console.log(checkIfToday(sales[0]?.sale_at), "chequing");
-
-
-
 	return (
 		<div className="flex-col md:w-1/2 ">
 			<h1 className="font-bold mt-4"> Detalles de Ventas</h1>

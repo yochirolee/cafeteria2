@@ -4,7 +4,7 @@ import {
 	updateProductById,
 	insertNewProduct,
 	db_CreateSale,
-	db_getSales,
+	db_getSalesByDay,
 } from "../../../../supabase/products_lib";
 import { createSale, setSales, startLoadingSales } from "../sales/salesSlice";
 import {
@@ -48,24 +48,20 @@ export const updateProductThunks = (product) => {
 
 //SALES THUNKS
 
-export const getSalesThunks = () => {
+export const getSalesThunks = (day) => {
+	console.log(day, "getsates");
 	return async (dispatch) => {
 		dispatch(startLoadingSales());
-		const { data: sales, error } = await db_getSales();
+		const { data: sales, error } = await db_getSalesByDay(day);
 		dispatch(setSales(sales));
 	};
 };
 
 export const saleProductThunks = (product) => {
-	console.log(product, "at sale Product Thnks");
 	return async (dispatch, getState) => {
 		dispatch(saleProduct(product.quantity_for_sell));
-
 		const sale = await db_CreateSale(product);
-		console.log(sale, "on Thunks");
-
 		dispatch(createSale(sale));
-		//create Sale on DB table sales
 		const { selectedProduct } = getState().productsSlice;
 		await updateProductById(selectedProduct);
 	};

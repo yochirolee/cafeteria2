@@ -3,6 +3,9 @@ import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
 import { setShowSaleModal } from "../../../Store/Cafeteria/Slices";
 
+
+
+
 export const ProductSellCard = ({ product }) => {
 	const dispatch = useDispatch();
 
@@ -16,13 +19,16 @@ export const ProductSellCard = ({ product }) => {
 			<div className="flex  py-2  w-full items-center">
 				<div className="flex flex-col w-full ">
 					<div className=" flex items-center justify-between pl-4 ">
-						<h4 className="font-bold   text-center text-sm text-gray-600">{product.name}</h4>
+						<h4 className="font-bold   text-center text-sm text-gray-600">
+							{product.name} - ${product.price_sell}
+						</h4>
+						<h4 className="font-bold   text-center text-sm text-green-600"></h4>
 						<div>
 							<i className="fas fa-box   p-1.5 text-gray-600"></i>
-							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
+							<small className="font-bold text-gray-600 pr-4">{parseFloat(product.entry) + parseFloat(product.quantity)-parseFloat(product.quantity_sold)}</small>
 							<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
 							<small className="font-bold text-green-500 pr-4">
-								{product.quantity * product.price_sell}
+								{product.quantity_sold * product.price_sell}
 							</small>
 						</div>
 					</div>
@@ -51,10 +57,11 @@ export const ProductSellCard = ({ product }) => {
 					onClick={() => onProductSale()}
 					className="fas fa-plus text-blue-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 				></i>
-				<i
+				<button
+					disabled={product.quantity -product.quantity_sold <= 0}
 					onClick={() => onProductSale()}
 					className="fas fas fa-cart-shopping  text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
-				></i>
+				></button>
 			</div>
 		</div>
 	);

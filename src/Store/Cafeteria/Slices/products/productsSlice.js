@@ -26,6 +26,22 @@ export const productsSlice = createSlice({
 				product.id === action.payload.id ? action.payload : product,
 			);
 		},
+
+		saleProduct: (state, action) => {
+			console.log(action.payload,'product Slice')
+			state.products.map((product) => {
+				if (
+					product.id === state.selectedProduct.id &&
+					product.quantity - (product.quantity_sold + parseInt(action.payload)) >= 0
+				) {
+					product.quantity_sold += parseInt(action.payload);
+					state.selectedProduct = product;
+					return product;
+				}
+				return product;
+			});
+		},
+
 		deleteProduct: (state, action) => {
 			state.products = state.products.filter((product) => product.id !== action.payload);
 		},
@@ -40,4 +56,5 @@ export const {
 	startLoadingProducts,
 	setProducts,
 	setSelectedProduct,
+	saleProduct,
 } = productsSlice.actions;

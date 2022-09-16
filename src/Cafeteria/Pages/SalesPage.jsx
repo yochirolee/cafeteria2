@@ -8,6 +8,7 @@ import { useForm } from "../../Hooks";
 import { CafeteriaLayout } from "../Layout/CafeteriaLayout";
 import { ProductSellCard } from "../Components/Products/ProductSellCard";
 import { SaleProductModal } from "../Components/Modals/SaleProductModal";
+import { SalesDetails } from "../Components/Sales/SalesDetails";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -65,34 +66,34 @@ export const SalesPage = () => {
 					</div>
 				</div>
 			</div>
-
-			<div className="flex-col md:w-1/2">
-				<h1 className="font-bold mt-4"> Productos</h1>
-				<div className="flex py-2 my-4 justify-center gap-2">
-					<SearchProductForm
-						search={search}
-						onInputChange={onInputChange}
-						onResetForm={onResetForm}
-					/>
-
-					<button
-						onClick={() => dispatch(setShowInsertModal())}
-						className=" border border-blue-500  text-blue-600 px-3.5 rounded-lg  justify-end"
-					>
-						<i className="fas fa-add"></i>
-					</button>
-				</div>
-				{isLoading ? (
-					<SkeletonListProducts />
-				) : (
-					<div className="max-h-72  overflow-y-auto">
-						{searchProductsResult
-							? searchProductsResult.map((product) => (
-									<ProductSellCard key={product.id} product={product} />
-							  ))
-							: products.map((product) => <ProductSellCard key={product.id} product={product} />)}
+			<h1 className="font-bold mt-4"> Productos</h1>
+			<div className="flex flex-col md:flex-row">
+				<div className="flex-col md:w-1/2">
+					<div className="flex py-2 my-4 justify-center gap-2">
+						<SearchProductForm
+							search={search}
+							onInputChange={onInputChange}
+							onResetForm={onResetForm}
+						/>
 					</div>
-				)}
+					{isLoading ? (
+						<SkeletonListProducts />
+					) : (
+						<div className="max-h-72  overflow-y-auto">
+							{searchProductsResult
+								? searchProductsResult.map((product) => (
+										<ProductSellCard key={product.id} product={product} />
+								  ))
+								: products.map((product) => <ProductSellCard key={product.id} product={product} />)}
+						</div>
+					)}
+				</div>
+				<div className="flex-col md:w-1/2 mt-4">
+					<h1 className="font-bold mt-4"> Detalles de Ventas</h1>
+					<div className="max-h-72  overflow-y-auto">
+						<SalesDetails />
+					</div>
+				</div>
 			</div>
 
 			<SaleProductModal />

@@ -1,6 +1,6 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowSaleModal } from "../../../Store/Cafeteria/Slices";
+import { productsSlice, saleProductThunks, setShowSaleModal } from "../../../Store/Cafeteria/Slices";
 import { useForm } from "react-hook-form";
 import { updateProductThunks } from "../../../Store/Cafeteria/Slices";
 
@@ -21,7 +21,7 @@ export const SaleProductModal = () => {
 	}, [selectedProduct?.id]);
 
 	const onSubmit = (data) => {
-		dispatch(updateProductThunks(data));
+		dispatch(saleProductThunks(data));
 		dispatch(setShowSaleModal());
 	};
 
@@ -58,30 +58,30 @@ export const SaleProductModal = () => {
 							</svg>
 							<span className="sr-only">Close modal</span>
 						</button>
-						<div className="py-6 px-6 lg:px-8">
+						<div className="py-6 px-6 text-center lg:px-8">
 							<h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
 								Vender Producto
 							</h3>
+							<div className="flex gap-2 justify-center ">
+								<div className="flex flex-col w-1/2 text-center  bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
+									<i className="fas fa-box text-3xl m-2">
+										<span className="font-bold m-4">{selectedProduct?.quantity}</span>
+									</i>
+									<div className="flex text-center flex-col gap-1 ">
+										<small className="text-xs">Cantidad en Inventario</small>
+									</div>
+								</div>
+								
+							</div>
 							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6" action="#">
-								<label
-									htmlFor="email"
-									className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-								>
-									Nombre: {selectedProduct?.name}
-								</label>
-								<label
-									htmlFor="email"
-									className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-								>
-									Cantidad en Inventario: {selectedProduct?.quantity}
-								</label>
+		
 
-								<div>
+								<div className="pt-4 text-center">
 									<label
 										htmlFor="email"
 										className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 									>
-										Cantidad a Vender
+										Introduzca Cantidad a Vender
 									</label>
 
 									<input
@@ -89,7 +89,7 @@ export const SaleProductModal = () => {
 										type="text"
 										placeholder="Cantidad"
 										defaultValue="0"
-										{...register("quantity", { required: true, maxLength: 80 })}
+										{...register("quantity_for_sell", { required: true, maxLength: 80 })}
 									/>
 									{errors.name && (
 										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>

@@ -1,6 +1,10 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { productsSlice, saleProductThunks, setShowSaleModal } from "../../../Store/Cafeteria/Slices";
+import {
+	productsSlice,
+	saleProductThunks,
+	setShowSaleModal,
+} from "../../../Store/Cafeteria/Slices";
 import { useForm } from "react-hook-form";
 import { updateProductThunks } from "../../../Store/Cafeteria/Slices";
 
@@ -65,17 +69,14 @@ export const SaleProductModal = () => {
 							<div className="flex gap-2 justify-center ">
 								<div className="flex flex-col w-1/2 text-center  bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
 									<i className="fas fa-box text-3xl m-2">
-										<span className="font-bold m-4">{selectedProduct?.quantity}</span>
+										<span className="font-bold m-4">{parseFloat(selectedProduct?.entry) + parseFloat(selectedProduct?.quantity)-parseFloat(selectedProduct?.quantity_sold)}</span>
 									</i>
 									<div className="flex text-center flex-col gap-1 ">
 										<small className="text-xs">Cantidad en Inventario</small>
 									</div>
 								</div>
-								
 							</div>
 							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6" action="#">
-		
-
 								<div className="pt-4 text-center">
 									<label
 										htmlFor="email"
@@ -86,12 +87,12 @@ export const SaleProductModal = () => {
 
 									<input
 										className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-										type="text"
+										type="number"
 										placeholder="Cantidad"
-										defaultValue="0"
-										{...register("quantity_for_sell", { required: true, maxLength: 80 })}
+										defaultValue="1"
+										{...register("quantity_for_sell", { min: 1, required: true })}
 									/>
-									{errors.name && (
+									{errors.quantity_for_sell && (
 										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>
 									)}
 								</div>

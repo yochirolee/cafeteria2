@@ -3,7 +3,7 @@ export const SkeletonListProducts = () => {
 	return (
 		<div
 			role="status"
-			className="p-4 space-y-4 max-w-md rounded border border-gray-200 divide-y divide-gray-200 shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
+			className="p-4 space-y-4  rounded border border-gray-200 divide-y divide-gray-200 shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
 		>
 			<div className="flex justify-between items-center">
 				<div>

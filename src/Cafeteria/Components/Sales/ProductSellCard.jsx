@@ -11,6 +11,7 @@ export const ProductSellCard = ({ product }) => {
 
 	const onProductSale = () => {
 		dispatch(setSelectedProduct(product));
+		console.log('dispath')
 		dispatch(setShowSaleModal());
 	};
 

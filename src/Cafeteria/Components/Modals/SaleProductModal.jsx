@@ -29,7 +29,6 @@ export const SaleProductModal = () => {
 		dispatch(setShowSaleModal());
 	};
 
-	if(selectedProduct?.name) return ("")
 
 	return (
 		<div

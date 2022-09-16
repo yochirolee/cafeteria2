@@ -8,6 +8,7 @@ import { CafeteriaLayout } from "../Layout/CafeteriaLayout";
 import { db_getSalesByDay } from "../../supabase/products_lib";
 import { SalesDetails } from "../Components/Sales/SalesDetails";
 import { getSalesThunks } from "../../Store/Cafeteria/Slices";
+import { Spinner } from "../Components/Spinner";
 
 const calculateTotalSales = (products) => {
 	let totalSales = 0;
@@ -59,24 +60,38 @@ export const DashboardPage = () => {
 					</div>
 				</div>
 				<div className="flex gap-2 justify-center ">
-					<div className="flex flex-col w-1/3 items-center bg-green-400 text-white p-4 rounded-lg  border flex-shrink-0">
-						<i className="fas fa-dollar-sign text-3xl my-2">
-							<span className="font-bold ml-2">{calculateTotalSales(sales)}</span>
-						</i>
-						<div className="flex flex-col gap-1 ">
-							<small className="text-xs">Venta del Dia</small>
-						</div>
+					<div className="flex flex-col w-1/2 items-center bg-green-400 text-white p-4 rounded-lg  border ">
+						{isLoadingSales ? (
+							<Spinner color="fill-green-500" />
+						) : (
+							<>
+								<i className="fas fa-dollar-sign text-3xl my-2">
+									<span className="font-bold ml-2">{calculateTotalSales(sales)}</span>
+								</i>
+								<div className="flex flex-col gap-1 ">
+									<small className="text-xs">Venta del Dia</small>
+								</div>
+							</>
+						)}
 					</div>
-					<div className="flex flex-col w-1/3 items-center bg-violet-400 text-white p-4 rounded-lg  border flex-shrink-0">
-						<i className="fas fa-arrow-up text-3xl my-2">
-							<span className="font-bold ml-2">{sales?.length}</span>
-						</i>
-						<div className="flex flex-col gap-1 ">
-							<small className="text-xs">Cantidad de Ventas</small>
-						</div>
+					<div className="flex flex-col w-1/2 items-center bg-violet-400 text-white p-4 rounded-lg  border flex-shrink-0">
+						{isLoadingSales ? (
+							<Spinner color="fill-violet-500" />
+						) : (
+							<>
+								<i className="fas fa-arrow-up text-3xl my-2">
+									<span className="font-bold ml-2">{sales?.length}</span>
+								</i>
+								<div className="flex flex-col gap-1 ">
+									<small className="text-xs">Venta del Dia</small>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
-				{isLoadingSales ? <SkeletonListProducts /> : <SalesDetails sales={sales} />}
+				<div className="my-3 ">
+					{isLoadingSales ? <SkeletonListProducts /> : <SalesDetails sales={sales} />}
+				</div>
 			</CafeteriaLayout>
 		</>
 	);

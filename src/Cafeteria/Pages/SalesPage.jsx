@@ -10,6 +10,7 @@ import { CafeteriaLayout } from "../Layout/CafeteriaLayout";
 import { ProductSellCard } from "../Components/Sales/ProductSellCard";
 import { SaleProductModal } from "../Components/Modals/SaleProductModal";
 import { SalesDetails } from "../Components/Sales/SalesDetails";
+import { Spinner } from "../Components/Spinner";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -53,27 +54,39 @@ export const SalesPage = () => {
 	return (
 		<CafeteriaLayout>
 			<h1 className="font-bold my-2">Ventas</h1>
-			<div className="flex gap-2 ">
-				<div className="flex flex-col w-1/3 items-center bg-green-400 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i className="fas fa-dollar-sign text-3xl my-2">
-						<span className="font-bold ml-2">{calculateTotalSales(sales)}</span>
-					</i>
-					<div className="flex flex-col gap-1 ">
-						<small className="text-xs">Venta del Dia</small>
-					</div>
+			<div className="flex gap-2 justify-center ">
+				<div className="flex flex-col w-1/2 items-center bg-green-400 text-white p-4 rounded-lg  border ">
+					{isLoadingSales ? (
+						<Spinner color="fill-green-500" />
+					) : (
+						<>
+							<i className="fas fa-dollar-sign text-3xl my-2">
+								<span className="font-bold ml-2">{calculateTotalSales(sales)}</span>
+							</i>
+							<div className="flex flex-col gap-1 ">
+								<small className="text-xs">Venta del Dia</small>
+							</div>
+						</>
+					)}
 				</div>
-				<div className="flex flex-col w-1/3 items-center bg-violet-400 text-white p-4 rounded-lg  border flex-shrink-0">
-					<i className="fas fa-arrow-up text-3xl my-2">
-						<span className="font-bold ml-2">{sales?.length}</span>
-					</i>
-					<div className="flex flex-col gap-1 ">
-						<small className="text-xs">Cantidad de Ventas</small>
-					</div>
+				<div className="flex flex-col w-1/2 items-center bg-violet-400 text-white p-4 rounded-lg  border flex-shrink-0">
+					{isLoadingSales ? (
+						<Spinner color="fill-violet-500" />
+					) : (
+						<>
+							<i className="fas fa-arrow-up text-3xl my-2">
+								<span className="font-bold ml-2">{sales?.length}</span>
+							</i>
+							<div className="flex flex-col gap-1 ">
+								<small className="text-xs">Venta del Dia</small>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 			<h1 className="font-bold mt-4"> Productos</h1>
 			<div className="flex flex-col md:flex-row">
-				<div className="flex-col md:w-1/2">
+				<div className="flex-col w-full lg:w-1/2  mx-auto">
 					<div className="flex py-2 my-4 justify-center gap-2">
 						<SearchProductForm
 							search={search}
@@ -96,7 +109,7 @@ export const SalesPage = () => {
 
 				<SalesDetails sales={sales} isLoadingSales={isLoadingSales} />
 			</div>
-			{isLoading ? "" : <SaleProductModal />}
+			<SaleProductModal />
 		</CafeteriaLayout>
 	);
 };

@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export const useProductCalcHook = () => {
-	const { selectedProduct,products } = useSelector((state) => state.productsSlice);
+	const { selectedProduct, products } = useSelector((state) => state.productsSlice);
+	const { sales } = useSelector((state) => state.salesSlice);
+
 	const [productStock, setProductStock] = useState(0);
-	const [totalSales,setTotalSales]=useState(0);
+	const [totalSales, setTotalSales] = useState(0);
 
 	const calculateProductStock = () => {
 		setProductStock(
@@ -15,20 +17,31 @@ export const useProductCalcHook = () => {
 	};
 
 	const calculateTotalSales = () => {
-		let sales = 0;
+		let sales_init = 0;
 		products.map((prod) => {
-			sales += parseFloat(prod.quantity_sold) * parseFloat(prod.price_sell);
+			sales_init += parseFloat(prod.quantity_sold) * parseFloat(prod.price_sell);
 		});
-		setTotalSales(sales)
+		setTotalSales(sales_init);
 	};
+
+	const totalSalesByDay = useMemo(() => {
+		let sales_init = 0;
+		sales.map((sale) => {
+			sales_init += parseFloat(sale.quantity_sold) * parseFloat(sale.price_sell);
+		});
+		return sales_init;
+	}, [sales.length]);
 
 	useEffect(() => {
 		calculateProductStock();
 		calculateTotalSales();
+
 		console.log("hooks");
 	}, [selectedProduct]);
 
 	return {
-		productStock,totalSales
+		productStock,
+		totalSales,
+		totalSalesByDay,
 	};
 };

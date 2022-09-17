@@ -14,6 +14,7 @@ export const SaleProductModal = () => {
 		register,
 		handleSubmit,
 		reset,
+		getValues,
 		formState: { errors },
 	} = useForm();
 
@@ -66,9 +67,7 @@ export const SaleProductModal = () => {
 							<div className="flex gap-2 justify-center ">
 								<div className="flex flex-col w-1/2 text-center  bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
 									<i className="fas fa-box text-3xl m-2">
-										<span className="font-bold m-4">
-											{productStock}
-										</span>
+										<span className="font-bold m-4">{productStock}</span>
 									</i>
 									<div className="flex text-center flex-col gap-1 ">
 										<small className="text-xs">Cantidad en Inventario</small>
@@ -98,6 +97,24 @@ export const SaleProductModal = () => {
 									{errors.quantity_for_sell && (
 										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>
 									)}
+
+									<label
+										for="default-range"
+										class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+									>
+										Default range
+									</label>
+									<input
+										id="default-range"
+										type="range"
+										{...register("quantity_for_sell", {
+											min: 1,
+											max: productStock,
+											required: true,
+										})}
+										max={productStock}
+										class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+									/>
 								</div>
 
 								<button

@@ -4,9 +4,6 @@ export const salesSlice = createSlice({
 	initialState: {
 		isLoadingSales: false,
 		sales: [],
-		product_id: null,
-		quantity: 0,
-		sale_price: 0,
 	},
 	reducers: {
 		setIsOnSale: (state) => {

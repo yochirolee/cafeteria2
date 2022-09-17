@@ -1,10 +1,10 @@
 import { React } from "react";
-import { format, parseISO } from "date-fns";
 
-export const SalesDetails = ({ sales, isLoadingSales }) => {
+export const SalesDetails = ({ sales, isLoadingSales,isASearch }) => {
 	return (
-		<div className="flex-col md:w-1/2 lg:px-4 ">
+		<div className="flex-col md:w-1/2 lg:px-4  ">
 			<h1 className="font-bold mt-4"> Detalles de Ventas</h1>
+			  {isASearch ? (<div>Ventas:{sales.length}</div>):(<></>)} 
 			<div className="max-h-72  overflow-y-auto">
 				<div className="p-2 h-64 ">
 					<div className="grid grid-cols-4 gap-2 text-center text-xs border-b border-dotted p-2  ">

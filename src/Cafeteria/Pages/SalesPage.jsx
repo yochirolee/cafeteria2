@@ -79,9 +79,9 @@ export const SalesPage = () => {
 				</div>
 			</div>
 			<h1 className="font-bold mt-4"> Productos</h1>
-			<div className="flex flex-col md:flex-row">
+			<div className="flex flex-col space-x-4 md:flex-row">
 				<div className="flex-col w-full lg:w-1/2  mx-auto">
-					<div className="flex py-2 my-4 justify-center gap-2">
+					<div className="flex py-2 my-4  justify-center gap-2">
 						<SearchProductForm
 							search={search}
 							onInputChange={onInputChange}
@@ -101,7 +101,7 @@ export const SalesPage = () => {
 					)}
 				</div>
 				{searchSalesResult ? (
-					<SalesDetails sales={searchSalesResult} isLoadingSales={isLoadingSales} />
+					<SalesDetails sales={searchSalesResult} isLoadingSales={isLoadingSales} isASearch={true} />
 				) : (
 					<SalesDetails sales={sales} isLoadingSales={isLoadingSales} />
 				)}

@@ -11,15 +11,14 @@ import { getSalesThunks } from "../../Store/Cafeteria/Slices";
 import { Spinner } from "../Components/Spinner";
 import { useProductCalcHook } from "../../Hooks/useProductCalcHook";
 
-
-
 export const DashboardPage = () => {
 	const { sales, isLoadingSales } = useSelector((state) => state.salesSlice);
-	const {totalSales}=useProductCalcHook()
+	const { totalSalesByDay } = useProductCalcHook();
 	const dispatch = useDispatch();
 	const [selectedDate, setSelectedDate] = useState(new Date());
-	
-	
+
+	console.log(totalSalesByDay)
+
 	const handleDateSelect = () => {};
 
 	const onChange = async (date) => {
@@ -64,7 +63,7 @@ export const DashboardPage = () => {
 						) : (
 							<>
 								<i className="fas fa-dollar-sign text-3xl my-2">
-									<span className="font-bold ml-2">{totalSales}</span>
+									<span className="font-bold ml-2">{totalSalesByDay}</span>
 								</i>
 								<div className="flex flex-col gap-1 ">
 									<small className="text-xs">Venta del Dia</small>

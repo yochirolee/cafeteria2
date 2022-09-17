@@ -2,7 +2,7 @@ import { React } from "react";
 import { useDispatch } from "react-redux";
 import { useProductCalcHook } from "../../../Hooks";
 import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
-import { setShowDeleteModal, setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
+import { setShowDeleteModal,setShowEntryModal, setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
 
 export const ProductListCard = ({ product }) => {
 	const dispatch = useDispatch();
@@ -17,6 +17,10 @@ export const ProductListCard = ({ product }) => {
 		dispatch(setSelectedProduct(product));
 		dispatch(setShowDeleteModal());
 	};
+	const onProductEntry = () => {
+		dispatch(setSelectedProduct(product));
+		dispatch(setShowEntryModal());
+	};
 
 	return (
 		<div className="flex flex-col border px-2 rounded-lg my-2 hover:bg-gray-100  py-2 pb-2  w-full ">
@@ -29,7 +33,7 @@ export const ProductListCard = ({ product }) => {
 				</div>
 				<div>
 					<i
-						onClick={() => onProductUpdate()}
+						onClick={() => onProductEntry()}
 						className="fas fa-plus text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
 					></i>
 					<i
@@ -66,7 +70,7 @@ export const ProductListCard = ({ product }) => {
 				<div className="flex flex-col text-center">
 					<small>Final</small>
 					<small
-						className={`text-white rounded-full font-bold ${
+						className={`text-white px-1 rounded-full font-bold ${
 							product.quantity === 0
 								? "bg-red-600 animate-pulse"
 								: product.quantity < 10

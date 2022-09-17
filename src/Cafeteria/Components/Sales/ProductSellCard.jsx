@@ -46,9 +46,9 @@ export const ProductSellCard = ({ product }) => {
 						<div className="flex flex-col text-center">
 							<small>Inicio</small>
 							<small>
-								{parseFloat(product.entry) +
+								{
 									parseFloat(product.quantity) +
-									parseFloat(product.quantity_sold)}
+									parseFloat(product.quantity_sold)-parseFloat(product.entry)}
 							</small>
 						</div>
 						<div className="flex flex-col text-center">
@@ -58,9 +58,9 @@ export const ProductSellCard = ({ product }) => {
 						<div className="flex flex-col text-center">
 							<small>a Venta</small>
 							<small>
-								{parseFloat(product.entry) +
-									parseFloat(product.quantity) +
-									parseFloat(product.quantity_sold)}
+								{
+									parseFloat(product.quantity) + parseFloat(product.quantity_sold)
+									}
 							</small>
 						</div>
 						<div className="flex flex-col text-center">

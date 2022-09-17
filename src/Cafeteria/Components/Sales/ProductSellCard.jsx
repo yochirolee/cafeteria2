@@ -20,12 +20,11 @@ export const ProductSellCard = ({ product }) => {
 		<div className="flex items-center justify-between  p-2 border rounded-lg my-2 hover:bg-gray-100">
 			<div className="flex  py-2  w-full items-center">
 				<div className="flex flex-col w-full ">
-					<div className=" flex items-center justify-between pl-4 ">
-						<h4 className="font-bold   text-center text-sm text-gray-600">
-							{product.name} - ${product.price_sell}
+					<div className=" flex flex-col  sm:flex-row justify-between pl-4 ">
+						<h4 className="font-bold   text-left text-sm text-gray-600">
+							{product.name} <small className="rounded-xl p-1  bg-blue-600 text-white">$ {product.price_sell}</small> 
 						</h4>
-						<h4 className="font-bold   text-center text-sm text-green-600"></h4>
-						<div>
+						<div className="text-right ">
 							<i className="fas fa-box   p-1.5 text-gray-600"></i>
 							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
 							<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>

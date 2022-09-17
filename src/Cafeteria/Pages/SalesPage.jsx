@@ -73,7 +73,7 @@ export const SalesPage = () => {
 								<span className="font-bold ml-2">{sales?.length}</span>
 							</i>
 							<div className="flex flex-col gap-1 ">
-								<small className="text-xs">Venta del Dia</small>
+								<small className="text-xs">Ventas Realizadas</small>
 							</div>
 						</>
 					)}
@@ -102,12 +102,16 @@ export const SalesPage = () => {
 					)}
 				</div>
 				{searchSalesResult ? (
-					<SalesDetails sales={searchSalesResult} isLoadingSales={isLoadingSales} isASearch={true} />
+					<SalesDetails
+						sales={searchSalesResult}
+						isLoadingSales={isLoadingSales}
+						isASearch={true}
+					/>
 				) : (
 					<SalesDetails sales={sales} isLoadingSales={isLoadingSales} />
 				)}
 			</div>
-			<EntryProductModal/>
+			<EntryProductModal />
 			<SaleProductModal />
 		</CafeteriaLayout>
 	);

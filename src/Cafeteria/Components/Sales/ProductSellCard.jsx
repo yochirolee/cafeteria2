@@ -50,7 +50,7 @@ export const ProductSellCard = ({ product }) => {
 							<small>Inicio</small>
 							<small>
 								{parseFloat(product.quantity) +
-									parseFloat(product.quantity_sold) -
+									parseFloat(totalSalesByProduct) -
 									parseFloat(product.entry)}
 							</small>
 						</div>
@@ -60,7 +60,7 @@ export const ProductSellCard = ({ product }) => {
 						</div>
 						<div className="flex flex-col text-center">
 							<small>a Venta</small>
-							<small>{parseFloat(product.quantity) + parseFloat(product.quantity_sold)}</small>
+							<small>{parseFloat(product.quantity) + parseFloat(totalSalesByProduct)}</small>
 						</div>
 						<div className="flex flex-col text-center">
 							<small>Vendido</small>

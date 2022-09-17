@@ -24,19 +24,15 @@ export const ProductSellCard = ({ product }) => {
 			<div className="flex  py-2  w-full ">
 				<div className="flex flex-col w-full ">
 					<div className=" flex items-center  justify-between pl-4 ">
-						<div className="flex space-x-2">
+						<div className="flex items-center space-x-2">
 							<h4 className="font-bold   text-left text-xs text-gray-600">{product.name}</h4>{" "}
-						</div>
-						<div className="flex shrink-0 ">
 							<div>
-								<small className="rounded-xl px-1 mr-4 text-xs bg-blue-700 text-white">
+								<small className="rounded-xl px-1 mr-4 text-xs bg-blue-600 text-white">
 									$ {product.price_sell}
 								</small>
 							</div>
-							<div>
-								<i className="fas fa-box   p-1.5 text-gray-600"></i>
-								<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
-							</div>
+						</div>
+						<div className="flex shrink-0 items-center ">
 							<div>
 								<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
 								<small className="font-bold text-green-500 pr-4">
@@ -66,6 +62,20 @@ export const ProductSellCard = ({ product }) => {
 							<small>Vendido</small>
 							<small>{totalSalesByProduct}</small>
 						</div>
+						<div className="flex flex-col text-center">
+							<small>Final</small>
+							<small
+								className={`text-white rounded-full font-bold ${
+									product.quantity === 0
+										? "bg-red-600 animate-pulse"
+										: product.quantity < 10
+										? " bg-yellow-500"
+										: "bg-green-600 "
+								}`}
+							>
+								{product.quantity}
+							</small>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -77,7 +87,11 @@ export const ProductSellCard = ({ product }) => {
 				<button
 					disabled={parseInt(product.quantity) <= 0}
 					onClick={() => onProductSale()}
-					className="fas fas fa-cart-shopping  text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
+					className={`fas fas fa-cart-shopping   mx-2 cursor-pointer  ${
+						parseInt(product.quantity) <= 0
+							? "text-red-400/60 hover:text-red-400/60"
+							: "text-blue-600 hover:text-blue-500"
+					}`}
 				></button>
 			</div>
 		</div>

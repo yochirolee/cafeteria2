@@ -7,11 +7,11 @@ import { CafeteriaApp } from "./CafeteriaApp";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
+	
 		<Provider store={store}>
 			<BrowserRouter>
 				<CafeteriaApp />
 			</BrowserRouter>
 		</Provider>
-	</React.StrictMode>,
+	
 );

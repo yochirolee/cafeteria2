@@ -1,5 +1,6 @@
 import { supabase } from "../supabase/supabaseClient";
 import { format, isToday, parseISO } from "date-fns";
+import { current } from "@reduxjs/toolkit";
 
 export const getProducts = async () => {
 	const { data, error } = await supabase.from("c_products").select("*").order("name");
@@ -24,9 +25,7 @@ export const updateProductById = async (product) => {
 
 //SALES
 
-
-
-export const db_getSalesByDay = async (day=new Date()) => {
+export const db_getSalesByDay = async (day = new Date()) => {
 	const { data, error } = await supabase
 		.from("c_sales")
 		.select("*")
@@ -36,7 +35,6 @@ export const db_getSalesByDay = async (day=new Date()) => {
 };
 
 export const db_CreateSale = async (product) => {
-	console.log(new Date());
 	const sale = {
 		product_id: product.id,
 		product_name: product.name,
@@ -48,4 +46,20 @@ export const db_CreateSale = async (product) => {
 	const { data, error } = await supabase.from("c_sales").insert([sale]);
 	if (error) console.log(error);
 	return data[0];
+};
+
+//CURRENT DAY///////////
+export const db_getCurrentDay = async () => {
+	const { data: currentDay, error } = await supabase.from("c_day").select("*");
+	if (currentDay.length === 0) {
+		console.log("no days");
+		const newCurrentDay = {
+			currentay: format(new Date(), "dd.MM.yyyy"),
+		};
+		console.log(newCurrentDay);
+		const { data, error } = await supabase.from("c_day").insert([newCurrentDay]);
+		console.log(data, error);
+	} else console.log(currentDay);
+
+	return { currentDay, error };
 };

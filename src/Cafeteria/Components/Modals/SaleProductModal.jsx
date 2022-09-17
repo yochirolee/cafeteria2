@@ -1,16 +1,13 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-	productsSlice,
-	saleProductThunks,
-	setShowSaleModal,
-} from "../../../Store/Cafeteria/Slices";
+import { saleProductThunks, setShowSaleModal } from "../../../Store/Cafeteria/Slices";
 import { useForm } from "react-hook-form";
-import { updateProductThunks } from "../../../Store/Cafeteria/Slices";
+import { useProductCalcHook } from "../../../Hooks/";
 
 export const SaleProductModal = () => {
 	const { showSaleModal } = useSelector((state) => state.uiSlice);
 	const { selectedProduct } = useSelector((state) => state.productsSlice);
+	const { productStock } = useProductCalcHook();
 	const dispatch = useDispatch();
 
 	const {
@@ -28,7 +25,6 @@ export const SaleProductModal = () => {
 		dispatch(saleProductThunks(data));
 		dispatch(setShowSaleModal());
 	};
-
 
 	return (
 		<div
@@ -70,7 +66,9 @@ export const SaleProductModal = () => {
 							<div className="flex gap-2 justify-center ">
 								<div className="flex flex-col w-1/2 text-center  bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
 									<i className="fas fa-box text-3xl m-2">
-										<span className="font-bold m-4">{parseFloat(selectedProduct?.entry) + parseFloat(selectedProduct?.quantity)-parseFloat(selectedProduct?.quantity_sold)}</span>
+										<span className="font-bold m-4">
+											{productStock}
+										</span>
 									</i>
 									<div className="flex text-center flex-col gap-1 ">
 										<small className="text-xs">Cantidad en Inventario</small>
@@ -91,7 +89,11 @@ export const SaleProductModal = () => {
 										type="number"
 										placeholder="Cantidad"
 										defaultValue="1"
-										{...register("quantity_for_sell", { min: 1, required: true })}
+										{...register("quantity_for_sell", {
+											min: 1,
+											max: productStock,
+											required: true,
+										})}
 									/>
 									{errors.quantity_for_sell && (
 										<span className="text-red-400  text-xs pl-2">Este campo es requerido</span>

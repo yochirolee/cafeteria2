@@ -9,19 +9,17 @@ import { db_getSalesByDay } from "../../supabase/products_lib";
 import { SalesDetails } from "../Components/Sales/SalesDetails";
 import { getSalesThunks } from "../../Store/Cafeteria/Slices";
 import { Spinner } from "../Components/Spinner";
+import { useProductCalcHook } from "../../Hooks/useProductCalcHook";
 
-const calculateTotalSales = (products) => {
-	let totalSales = 0;
-	products.map((prod) => {
-		totalSales += parseFloat(prod.quantity_sold) * parseFloat(prod.price_sell);
-	});
-	return totalSales;
-};
+
 
 export const DashboardPage = () => {
 	const { sales, isLoadingSales } = useSelector((state) => state.salesSlice);
+	const {totalSales}=useProductCalcHook()
 	const dispatch = useDispatch();
 	const [selectedDate, setSelectedDate] = useState(new Date());
+	
+	
 	const handleDateSelect = () => {};
 
 	const onChange = async (date) => {
@@ -66,7 +64,7 @@ export const DashboardPage = () => {
 						) : (
 							<>
 								<i className="fas fa-dollar-sign text-3xl my-2">
-									<span className="font-bold ml-2">{calculateTotalSales(sales)}</span>
+									<span className="font-bold ml-2">{totalSales}</span>
 								</i>
 								<div className="flex flex-col gap-1 ">
 									<small className="text-xs">Venta del Dia</small>

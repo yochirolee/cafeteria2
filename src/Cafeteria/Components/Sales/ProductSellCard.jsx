@@ -1,10 +1,13 @@
-import { React } from "react";
-import { useDispatch } from "react-redux";
+import { React, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useProductCalcHook } from "../../../Hooks";
 import { setSelectedProduct, setShowEntryModal } from "../../../Store/Cafeteria/Slices";
 import { setShowSaleModal } from "../../../Store/Cafeteria/Slices";
 
 export const ProductSellCard = ({ product }) => {
 	const dispatch = useDispatch();
+
+	const { totalSalesByProduct } = useProductCalcHook(product);
 
 	const onProductSale = () => {
 		dispatch(setSelectedProduct(product));
@@ -37,7 +40,7 @@ export const ProductSellCard = ({ product }) => {
 							<div>
 								<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
 								<small className="font-bold text-green-500 pr-4">
-									{product.quantity_sold * product.price_sell}
+									{totalSalesByProduct * product.price_sell}
 								</small>
 							</div>
 						</div>
@@ -46,9 +49,9 @@ export const ProductSellCard = ({ product }) => {
 						<div className="flex flex-col text-center">
 							<small>Inicio</small>
 							<small>
-								{
-									parseFloat(product.quantity) +
-									parseFloat(product.quantity_sold)-parseFloat(product.entry)}
+								{parseFloat(product.quantity) +
+									parseFloat(product.quantity_sold) -
+									parseFloat(product.entry)}
 							</small>
 						</div>
 						<div className="flex flex-col text-center">
@@ -57,15 +60,11 @@ export const ProductSellCard = ({ product }) => {
 						</div>
 						<div className="flex flex-col text-center">
 							<small>a Venta</small>
-							<small>
-								{
-									parseFloat(product.quantity) + parseFloat(product.quantity_sold)
-									}
-							</small>
+							<small>{parseFloat(product.quantity) + parseFloat(product.quantity_sold)}</small>
 						</div>
 						<div className="flex flex-col text-center">
 							<small>Vendido</small>
-							<small>{product.quantity_sold}</small>
+							<small>{totalSalesByProduct}</small>
 						</div>
 					</div>
 				</div>

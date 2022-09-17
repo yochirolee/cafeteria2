@@ -49,7 +49,7 @@ export const db_CreateSale = async (product, quantity_for_sell) => {
 };
 
 //CURRENT DAY///////////
-export const db_getCurrentDay = async () => {
+/*export const db_getCurrentDay = async () => {
 	const { data: currentDay, error } = await supabase.from("c_day").select("*");
 	if (currentDay.length === 0) {
 		console.log("no days");
@@ -62,4 +62,4 @@ export const db_getCurrentDay = async () => {
 	} else console.log(currentDay);
 
 	return { currentDay, error };
-};
+};*/

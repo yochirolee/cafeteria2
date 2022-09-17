@@ -1,10 +1,19 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
-import { setShowDeleteModal, setShowUpdateProductModal } from "../../../Store/Cafeteria/Slices";
+import {
+	setShowDeleteModal,
+	setShowEntryModal,
+	setShowUpdateProductModal,
+} from "../../../Store/Cafeteria/Slices";
 
 export const ProductListCard = ({ product }) => {
 	const dispatch = useDispatch();
+
+	const onProductEntry = () => {
+		dispatch(setSelectedProduct(product));
+		dispatch(setShowEntryModal());
+	};
 
 	const onProductUpdate = () => {
 		dispatch(setSelectedProduct(product));
@@ -24,10 +33,6 @@ export const ProductListCard = ({ product }) => {
 						<div>
 							<i className="fas fa-box   p-1.5 text-gray-600"></i>
 							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
-							<i className="fas fa-sack-dollar   p-1.5 text-green-600"></i>
-							<small className="font-bold text-green-600 pr-4">
-								{product.quantity * product.price_sell}
-							</small>
 						</div>
 					</div>
 					<div className="flex  p-2 text-xs justify-around gap-2 text">
@@ -49,12 +54,16 @@ export const ProductListCard = ({ product }) => {
 				</div>
 			</div>
 			<i
-				onClick={() => onProductDelete()}
-				className="fas fa-trash-can text-red-400 mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
+				onClick={() => onProductEntry()}
+				className="fas fa-plus text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
 			></i>
 			<i
 				onClick={() => onProductUpdate()}
-				className="fas fa-chevron-right text-gray-600 mx-2 cursor-pointer hover:text-gray-600 "
+				className="fas fa-edit text-green-600 mx-2 cursor-pointer hover:text-gray-600 "
+			></i>
+			<i
+				onClick={() => onProductDelete()}
+				className="fas fa-trash-can text-red-400 mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 			></i>
 		</div>
 	);

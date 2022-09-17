@@ -17,8 +17,7 @@ export const DashboardPage = () => {
 	const dispatch = useDispatch();
 	const [selectedDate, setSelectedDate] = useState(new Date());
 
-	console.log(totalSalesByDay)
-
+	
 	const handleDateSelect = () => {};
 
 	const onChange = async (date) => {

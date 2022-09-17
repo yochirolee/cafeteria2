@@ -8,6 +8,7 @@ import { SkeletonListProducts } from "../Components/Skeleton";
 import { EditProductModal, DeleteModal, InsertProductModal } from "../Components/Modals";
 import { useForm } from "../../Hooks";
 import { CafeteriaLayout } from "../Layout/CafeteriaLayout";
+import { EntryProductModal } from "../Components/Modals/EntryProductModal";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -88,6 +89,7 @@ export const ProductPage = () => {
 				)}
 			</div>
 			<InsertProductModal />
+			<EntryProductModal />
 			<EditProductModal />
 			<DeleteModal />
 		</CafeteriaLayout>

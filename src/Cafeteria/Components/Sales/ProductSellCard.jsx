@@ -14,11 +14,6 @@ export const ProductSellCard = ({ product }) => {
 		dispatch(setShowSaleModal());
 	};
 
-	const onProductEntry = () => {
-		dispatch(setSelectedProduct(product));
-		dispatch(setShowEntryModal());
-	};
-
 	return (
 		<div className="flex items-center justify-between  p-2 border rounded-lg my-2 hover:bg-gray-100">
 			<div className="flex  py-2  w-full ">
@@ -80,10 +75,6 @@ export const ProductSellCard = ({ product }) => {
 				</div>
 			</div>
 			<div className="flex   w-1/5 justify-center">
-				<i
-					onClick={() => onProductEntry()}
-					className="fas fa-plus text-blue-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
-				></i>
 				<button
 					disabled={parseInt(product.quantity) <= 0}
 					onClick={() => onProductSale()}

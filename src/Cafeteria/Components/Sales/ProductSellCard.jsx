@@ -1,18 +1,19 @@
 import { React } from "react";
 import { useDispatch } from "react-redux";
-import { setSelectedProduct } from "../../../Store/Cafeteria/Slices";
+import { setSelectedProduct, setShowEntryModal } from "../../../Store/Cafeteria/Slices";
 import { setShowSaleModal } from "../../../Store/Cafeteria/Slices";
-
-
-
 
 export const ProductSellCard = ({ product }) => {
 	const dispatch = useDispatch();
 
 	const onProductSale = () => {
 		dispatch(setSelectedProduct(product));
-		console.log('dispath')
 		dispatch(setShowSaleModal());
+	};
+
+	const onProductEntry = () => {
+		dispatch(setSelectedProduct(product));
+		dispatch(setShowEntryModal());
 	};
 
 	return (
@@ -26,7 +27,7 @@ export const ProductSellCard = ({ product }) => {
 						<h4 className="font-bold   text-center text-sm text-green-600"></h4>
 						<div>
 							<i className="fas fa-box   p-1.5 text-gray-600"></i>
-							<small className="font-bold text-gray-600 pr-4">{parseFloat(product.entry) + parseFloat(product.quantity)-parseFloat(product.quantity_sold)}</small>
+							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
 							<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
 							<small className="font-bold text-green-500 pr-4">
 								{product.quantity_sold * product.price_sell}
@@ -36,7 +37,11 @@ export const ProductSellCard = ({ product }) => {
 					<div className="flex border-t text-slate-600 p-1 px-4 border-dotted  text-xs justify-between gap-2 text">
 						<div className="flex flex-col text-center">
 							<small>Inicio</small>
-							<small>{product.quantity}</small>
+							<small>
+								{parseFloat(product.entry) +
+									parseFloat(product.quantity) +
+									parseFloat(product.quantity_sold)}
+							</small>
 						</div>
 						<div className="flex flex-col text-center">
 							<small>Entrada</small>
@@ -44,7 +49,11 @@ export const ProductSellCard = ({ product }) => {
 						</div>
 						<div className="flex flex-col text-center">
 							<small>a Venta</small>
-							<small>{parseFloat(product.entry) + parseFloat(product.quantity)}</small>
+							<small>
+								{parseFloat(product.entry) +
+									parseFloat(product.quantity) +
+									parseFloat(product.quantity_sold)}
+							</small>
 						</div>
 						<div className="flex flex-col text-center">
 							<small>Vendido</small>
@@ -55,11 +64,11 @@ export const ProductSellCard = ({ product }) => {
 			</div>
 			<div className="flex   w-1/5 justify-center">
 				<i
-					onClick={() => onProductSale()}
+					onClick={() => onProductEntry()}
 					className="fas fa-plus text-blue-600  mx-2 cursor-pointer hover:animate-pulse hover:text-red-500"
 				></i>
 				<button
-					disabled={product.quantity -product.quantity_sold <= 0}
+					disabled={parseInt(product.quantity) <= 0}
 					onClick={() => onProductSale()}
 					className="fas fas fa-cart-shopping  text-blue-600 mx-2 cursor-pointer hover:text-gray-600 "
 				></button>

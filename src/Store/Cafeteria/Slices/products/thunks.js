@@ -1,7 +1,7 @@
 import {
 	getProducts,
 	deleteProductById,
-	updateProductById,
+	db_updateProduct,
 	insertNewProduct,
 	db_CreateSale,
 	db_getSalesByDay,
@@ -14,6 +14,7 @@ import {
 	deleteProduct,
 	insertProduct,
 	saleProduct,
+	updateEntryProduct,
 } from "./productsSlice";
 
 export const getProductsThunks = () => {
@@ -35,17 +36,39 @@ export const insertProductThunks = (product) => {
 	};
 };
 
-export const updateProductThunks = (product) => {
-	return async (dispatch) => {
+export const updateEntryProductThunks = (entry) => {
+	return async (dispatch, getState) => {
 		try {
-			await updateProductById(product);
-			dispatch(updateProduct(product));
+			dispatch(updateEntryProduct(entry));
+			const { selectedProduct } = getState().productsSlice;
+			await db_updateProduct(selectedProduct);
 		} catch (error) {
 			console.log(error);
 		}
 	};
 };
 
+export const updateProductThunks = (product) => {
+	console.log(product, "product for update on thusnk");
+	return async (dispatch) => {
+		try {
+			await db_updateProduct(product);
+			dispatch(updateProduct(product));
+		} catch (error) {
+			console.log(error);
+		}
+	};
+};
+export const deleteProductThunks = (product_id) => {
+	return async (dispatch) => {
+		try {
+			await deleteProductById(product_id);
+			dispatch(deleteProduct(product_id));
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+};
 //SALES THUNKS
 
 export const getSalesThunks = (day) => {
@@ -57,23 +80,21 @@ export const getSalesThunks = (day) => {
 	};
 };
 
-export const saleProductThunks = (product) => {
+export const saleProductThunks = (quantity_for_sell) => {
 	return async (dispatch, getState) => {
-		dispatch(saleProduct(product.quantity_for_sell));
-		const sale = await db_CreateSale(product);
-		dispatch(createSale(sale));
+		dispatch(saleProduct(quantity_for_sell));
 		const { selectedProduct } = getState().productsSlice;
-		await updateProductById(selectedProduct);
-	};
-};
+		const sale = await db_CreateSale(selectedProduct, quantity_for_sell);
 
-export const deleteProductThunks = (product_id) => {
-	return async (dispatch) => {
-		try {
-			await deleteProductById(product_id);
-			dispatch(deleteProduct(product_id));
-		} catch (error) {
-			console.log(error.message);
-		}
+		dispatch(createSale(sale));
+		await db_updateProduct(selectedProduct);
 	};
+
+	/*return async (dispatch, getState) => {	
+		dispatch(saleProduct(product.quantity_for_sell));
+		
+		
+		const { selectedProduct } = getState().productsSlice;
+		
+	};*/
 };

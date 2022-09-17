@@ -27,18 +27,26 @@ export const productsSlice = createSlice({
 			);
 		},
 
+		updateEntryProduct: (state, action) => {
+			state.products.map((product) => {
+				if (product.id === state.selectedProduct.id) {
+					product.entry += parseInt(action.payload);
+					product.quantity += parseInt(action.payload);
+					state.selectedProduct = product;
+				}
+			});
+		},
+
 		saleProduct: (state, action) => {
-			console.log(action.payload,'product Slice')
 			state.products.map((product) => {
 				if (
 					product.id === state.selectedProduct.id &&
-					product.quantity - (product.quantity_sold + parseInt(action.payload)) >= 0
+					parseInt(product.quantity) - parseInt(action.payload) >= 0
 				) {
 					product.quantity_sold += parseInt(action.payload);
+					product.quantity -= parseInt(action.payload);
 					state.selectedProduct = product;
-					return product;
 				}
-				return product;
 			});
 		},
 
@@ -57,4 +65,5 @@ export const {
 	setProducts,
 	setSelectedProduct,
 	saleProduct,
+	updateEntryProduct,
 } = productsSlice.actions;

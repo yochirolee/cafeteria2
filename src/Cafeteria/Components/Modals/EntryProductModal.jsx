@@ -1,13 +1,16 @@
 import { React, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { saleProductThunks, setShowSaleModal } from "../../../Store/Cafeteria/Slices";
+import {
+	setShowEntryModal,
+	updateEntryProductThunks,
+	updateProductThunks,
+} from "../../../Store/Cafeteria/Slices";
 import { useForm } from "react-hook-form";
-import { useProductCalcHook } from "../../../Hooks/";
+import { useProductCalcHook } from "../../../Hooks";
 
-export const SaleProductModal = () => {
-	const { showSaleModal } = useSelector((state) => state.uiSlice);
+export const EntryProductModal = () => {
+	const { showEntryModal } = useSelector((state) => state.uiSlice);
 	const { selectedProduct } = useSelector((state) => state.productsSlice);
-
 	const dispatch = useDispatch();
 
 	const {
@@ -19,13 +22,12 @@ export const SaleProductModal = () => {
 	} = useForm();
 
 	useEffect(() => {
-		reset(selectedProduct);
+		reset({ entry: 1 });
 	}, [selectedProduct?.id]);
 
 	const onSubmit = (data) => {
-		console.log(data.quantity_for_sell, "quantity for sell");
-		dispatch(saleProductThunks(data.quantity_for_sell));
-		dispatch(setShowSaleModal());
+		dispatch(updateEntryProductThunks(data.entry));
+		dispatch(setShowEntryModal());
 	};
 
 	return (
@@ -34,14 +36,14 @@ export const SaleProductModal = () => {
 			tabIndex="-1"
 			aria-hidden="true"
 			className={`overflow-y-auto bg-gray-500/60  overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center ${
-				showSaleModal ? " " : "hidden"
+				showEntryModal ? " " : "hidden"
 			}`}
 		>
 			<div className="relative p-4 w-full max-w-md h-full md:h-auto">
 				<div className="relative p-4 w-full max-w-md h-full md:h-auto">
 					<div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
 						<button
-							onClick={() => dispatch(setShowSaleModal())}
+							onClick={() => dispatch(setShowEntryModal())}
 							type="button"
 							className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
 							data-modal-toggle="authentication-modal"
@@ -63,25 +65,16 @@ export const SaleProductModal = () => {
 						</button>
 						<div className="py-6 px-6 text-center lg:px-8">
 							<h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-								Vender Producto
+								Entrada de Producto
 							</h3>
-							<div className="flex gap-2 justify-center ">
-								<div className="flex flex-col w-1/2 text-center  bg-blue-500 text-white p-4 rounded-lg  border flex-shrink-0">
-									<i className="fas fa-box text-3xl m-2">
-										<span className="font-bold m-4">{selectedProduct?.quantity}</span>
-									</i>
-									<div className="flex text-center flex-col gap-1 ">
-										<small className="text-xs">Cantidad en Inventario</small>
-									</div>
-								</div>
-							</div>
+
 							<form onSubmit={handleSubmit(onSubmit)} className="space-y-6" action="#">
 								<div className="pt-4 text-center">
 									<label
 										htmlFor="email"
 										className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
 									>
-										Introduzca Cantidad a Vender
+										Introduzca Cantidad de Entrada
 									</label>
 
 									<input
@@ -89,9 +82,8 @@ export const SaleProductModal = () => {
 										type="number"
 										placeholder="Cantidad"
 										defaultValue="1"
-										{...register("quantity_for_sell", {
+										{...register("entry", {
 											min: 1,
-											max: parseInt(selectedProduct?.quantity),
 
 											required: true,
 										})}
@@ -105,7 +97,7 @@ export const SaleProductModal = () => {
 									type="submit"
 									className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 								>
-									Vender Producto
+									Nueva Entrada
 								</button>
 							</form>
 						</div>

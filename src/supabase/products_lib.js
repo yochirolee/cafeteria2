@@ -1,6 +1,5 @@
 import { supabase } from "../supabase/supabaseClient";
-import { format, isToday, parseISO } from "date-fns";
-import { current } from "@reduxjs/toolkit";
+import { format } from "date-fns";
 
 export const getProducts = async () => {
 	const { data, error } = await supabase.from("c_products").select("*").order("name");
@@ -18,8 +17,9 @@ export const deleteProductById = async (product_id) => {
 	return { data, error };
 };
 
-export const updateProductById = async (product) => {
+export const db_updateProduct = async (product) => {
 	const { data, error } = await supabase.from("c_products").update(product).eq("id", product.id);
+
 	return { data, error };
 };
 
@@ -34,11 +34,11 @@ export const db_getSalesByDay = async (day = new Date()) => {
 	return { data, error };
 };
 
-export const db_CreateSale = async (product) => {
+export const db_CreateSale = async (product, quantity_for_sell) => {
 	const sale = {
 		product_id: product.id,
 		product_name: product.name,
-		quantity_sold: product.quantity_for_sell,
+		quantity_sold: quantity_for_sell,
 		price_sell: product.price_sell,
 		date: format(new Date(), "dd.MM.yyyy"),
 	};

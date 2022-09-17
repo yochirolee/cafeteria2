@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
-export const useProductCalcHook = () => {
+export const useProductCalcHook = (product={}) => {
 	const { selectedProduct, products } = useSelector((state) => state.productsSlice);
 	const { sales } = useSelector((state) => state.salesSlice);
 
@@ -10,9 +10,9 @@ export const useProductCalcHook = () => {
 
 	const calculateProductStock = () => {
 		setProductStock(
-			parseFloat(selectedProduct?.entry) +
-				parseFloat(selectedProduct?.quantity) -
-				parseFloat(selectedProduct?.quantity_sold),
+			parseFloat(product?.entry) +
+				parseFloat(product?.quantity) -
+				parseFloat(product?.quantity_sold),
 		);
 	};
 

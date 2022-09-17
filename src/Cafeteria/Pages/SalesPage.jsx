@@ -12,6 +12,7 @@ import { SaleProductModal } from "../Components/Modals/SaleProductModal";
 import { SalesDetails } from "../Components/Sales/SalesDetails";
 import { Spinner } from "../Components/Spinner";
 import { useProductCalcHook } from "../../Hooks/useProductCalcHook";
+import { EntryProductModal } from "../Components/Modals/EntryProductModal";
 
 const getProductsByName = (products, search) => {
 	if (search.length > 2)
@@ -106,6 +107,7 @@ export const SalesPage = () => {
 					<SalesDetails sales={sales} isLoadingSales={isLoadingSales} />
 				)}
 			</div>
+			<EntryProductModal/>
 			<SaleProductModal />
 		</CafeteriaLayout>
 	);

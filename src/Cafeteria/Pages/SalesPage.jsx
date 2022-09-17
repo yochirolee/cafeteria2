@@ -30,7 +30,7 @@ const getSalesByName = (sales, search) => {
 export const SalesPage = () => {
 	const { products, isLoading } = useSelector((state) => state.productsSlice);
 	const { sales, isLoadingSales } = useSelector((state) => state.salesSlice);
-	const { totalSales } = useProductCalcHook();
+	const { totalSalesByDay } = useProductCalcHook();
 	const { search, onInputChange, onResetForm } = useForm({ search: "" });
 
 	const searchProductsResult = useMemo(
@@ -56,7 +56,7 @@ export const SalesPage = () => {
 					) : (
 						<>
 							<i className="fas fa-dollar-sign text-3xl my-2">
-								<span className="font-bold ml-2">{totalSales}</span>
+								<span className="font-bold ml-2">{totalSalesByDay}</span>
 							</i>
 							<div className="flex flex-col gap-1 ">
 								<small className="text-xs">Venta del Dia</small>

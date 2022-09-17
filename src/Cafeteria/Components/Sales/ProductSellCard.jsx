@@ -18,19 +18,28 @@ export const ProductSellCard = ({ product }) => {
 
 	return (
 		<div className="flex items-center justify-between  p-2 border rounded-lg my-2 hover:bg-gray-100">
-			<div className="flex  py-2  w-full items-center">
+			<div className="flex  py-2  w-full ">
 				<div className="flex flex-col w-full ">
-					<div className=" flex flex-col  sm:flex-row justify-between pl-4 ">
-						<h4 className="font-bold   text-left text-sm text-gray-600">
-							{product.name} <small className="rounded-xl p-1  bg-blue-600 text-white">$ {product.price_sell}</small> 
-						</h4>
-						<div className="text-right ">
-							<i className="fas fa-box   p-1.5 text-gray-600"></i>
-							<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
-							<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
-							<small className="font-bold text-green-500 pr-4">
-								{product.quantity_sold * product.price_sell}
-							</small>
+					<div className=" flex items-center  justify-between pl-4 ">
+						<div className="flex space-x-2">
+							<h4 className="font-bold   text-left text-xs text-gray-600">{product.name}</h4>{" "}
+						</div>
+						<div className="flex shrink-0 ">
+							<div>
+								<small className="rounded-xl px-1 mr-4 text-xs bg-blue-700 text-white">
+									$ {product.price_sell}
+								</small>
+							</div>
+							<div>
+								<i className="fas fa-box   p-1.5 text-gray-600"></i>
+								<small className="font-bold text-gray-600 pr-4">{product.quantity}</small>
+							</div>
+							<div>
+								<i className="fas fa-sack-dollar   p-1.5 text-green-500"></i>
+								<small className="font-bold text-green-500 pr-4">
+									{product.quantity_sold * product.price_sell}
+								</small>
+							</div>
 						</div>
 					</div>
 					<div className="flex border-t text-slate-600 p-1 px-4 border-dotted  text-xs justify-between gap-2 text">
